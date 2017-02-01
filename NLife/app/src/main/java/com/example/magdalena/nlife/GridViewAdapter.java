@@ -5,8 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Created by Toni on 01.02.2017.
@@ -44,8 +46,14 @@ public class GridViewAdapter extends BaseAdapter {
         }
         TextView textView=(TextView)convertView.findViewById(R.id.textView);
         textView.setText("Search");
-        ImageView imageView=(ImageView)convertView.findViewById(R.id.imageView);
-        imageView.setImageResource(R.drawable.search_img);
+        ImageButton imageButton=(ImageButton)convertView.findViewById(R.id.imageButton);
+        imageButton.setImageResource(R.drawable.search_img);
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context,"GridItem clicked",Toast.LENGTH_LONG).show();
+            }
+        });
         return convertView;
     }
 }
