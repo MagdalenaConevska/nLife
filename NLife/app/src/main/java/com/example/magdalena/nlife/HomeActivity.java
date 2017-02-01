@@ -3,7 +3,7 @@ package com.example.magdalena.nlife;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends MasterActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
