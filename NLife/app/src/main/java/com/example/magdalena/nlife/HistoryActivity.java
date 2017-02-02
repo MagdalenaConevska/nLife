@@ -33,4 +33,13 @@ public class HistoryActivity extends  MasterActivity  {
 
     }
 
+    public void startWeeklyIntakeActivity(View v){
+
+        Intent intent = new Intent(this, WeeklyIntakeActivity.class);
+        startActivity(intent);
+
+    }
+
+
+
 }

@@ -17,13 +17,14 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/btnStartHistory"
         android:onClick="startHistoryActivity"
         />
 
     <GridView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="false"
         android:verticalSpacing="10dp"
         android:horizontalSpacing="10dp"
         android:gravity="center"
@@ -31,7 +32,9 @@
         android:id="@+id/gridView"
         android:clickable="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+
+        android:layout_below="@id/btnStartHistory"
+        />
 
 
 </RelativeLayout>
