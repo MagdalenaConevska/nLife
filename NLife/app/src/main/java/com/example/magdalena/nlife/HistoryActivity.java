@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
-public class HistoryActivity extends AppCompatActivity {
+public class HistoryActivity extends  MasterActivity  {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

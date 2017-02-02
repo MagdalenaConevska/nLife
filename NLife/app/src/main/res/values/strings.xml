@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">NLife</string>
 
+
     <string-array name="days_array">
         <item>Monday</item>
         <item>Tuesday</item>
@@ -15,5 +16,9 @@
     <string name="btnDaily">Analyze daily intake</string>
     <string name="btnWeekly">Analyze weekly intake</string>
 
+
+
+    <string name="griditem">GridItem</string>
+    <string name="title_activity_search">SearchActivity</string>
 
 </resources>

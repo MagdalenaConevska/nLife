@@ -15,8 +15,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+<<<<<<< HEAD
         <activity android:name=".HistoryActivity" />
         <activity android:name=".DailyIntakeActivity"></activity>
+=======
+        <activity android:name=".MasterActivity" />
+        <activity
+            android:name=".SearchActivity"
+            android:label="@string/title_activity_search"
+            android:parentActivityName=".MasterActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.magdalena.nlife.MasterActivity" />
+        </activity>
+>>>>>>> 00424e2d3e22aa78dff75cadec6192f8f06b5283
     </application>
 
 </manifest>
