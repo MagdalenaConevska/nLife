@@ -1,5 +1,6 @@
 package com.example.magdalena.nlife;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -28,21 +29,21 @@ public class MasterActivity extends AppCompatActivity {
         homeMenuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"HomeButton clicked",Toast.LENGTH_LONG).show();
+                startActivity(new Intent(getApplication(),HomeActivity.class));
             }
         });
         ImageButton searchMenuButton=(ImageButton)this.findViewById(R.id.searchMenuButton);
         searchMenuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"SearchButton clicked",Toast.LENGTH_LONG).show();
+                startActivity(new Intent(getApplication(),SearchActivity.class));
             }
         });
         ImageButton historyMenuButton=(ImageButton)this.findViewById(R.id.historyMenuButton);
         historyMenuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"HistoryButton clicked",Toast.LENGTH_LONG).show();
+                startActivity(new Intent(getApplication(),HistoryActivity.class));
             }
         });
     }

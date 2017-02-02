@@ -20,4 +20,9 @@
     <string name="griditem">GridItem</string>
     <string name="title_activity_search">SearchActivity</string>
 
+    <string name="gridSearch">Search</string>
+    <string name="gridDaily">Daily intake</string>
+    <string name="gridFive">5 a day</string>
+    <string name="gridHistory">History</string>
+
 </resources>

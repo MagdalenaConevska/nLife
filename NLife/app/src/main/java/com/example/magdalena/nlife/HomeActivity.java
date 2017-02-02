@@ -20,13 +20,4 @@ public class HomeActivity extends MasterActivity {
         GridViewAdapter gridViewAdapter=new GridViewAdapter(getApplicationContext());
         gridView.setAdapter(gridViewAdapter);
     }
-
-    public void startHistoryActivity(View v){
-
-       Intent intent = new Intent(this,HistoryActivity.class);
-        startActivity(intent);
-
-
-
-    }
 }

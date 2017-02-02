@@ -1,6 +1,7 @@
 package com.example.magdalena.nlife;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,22 +39,70 @@ public class GridViewAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         if(convertView==null)
         {
             LayoutInflater inflater=(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView=inflater.inflate(R.layout.grid_item_layout,parent,false);
         }
         TextView textView=(TextView)convertView.findViewById(R.id.textView);
-        textView.setText("Search");
         ImageButton imageButton=(ImageButton)convertView.findViewById(R.id.imageButton);
-        imageButton.setImageResource(R.drawable.search_img);
-        imageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(context,"GridItem clicked",Toast.LENGTH_LONG).show();
-            }
-        });
+        setListeners(textView,imageButton,position);
         return convertView;
+    }
+
+    private void setListeners(TextView textView, ImageButton imageButton, int pos){
+        switch (pos){
+            case 0:
+                textView.setText(context.getResources().getString(R.string.gridSearch));
+                imageButton.setImageResource(R.drawable.search_img);
+                imageButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(context,"0 GridItem clicked",Toast.LENGTH_LONG).show();
+                        Intent intent=new Intent(context,SearchActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        context.startActivity(intent);
+                    }
+                });
+                break;
+            case 1:
+                textView.setText(context.getResources().getString(R.string.gridDaily));
+                imageButton.setImageResource(R.drawable.daily_intake_img);
+                imageButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(context,"1 GridItem clicked",Toast.LENGTH_LONG).show();
+                        Intent intent=new Intent(context,DailyIntakeActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        context.startActivity(intent);
+                    }
+                });
+                break;
+            case 2:
+                textView.setText(context.getResources().getString(R.string.gridFive));
+                imageButton.setImageResource(R.drawable.five_a_day_img);
+                imageButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(context,"2 GridItem clicked",Toast.LENGTH_LONG).show();
+                        //show dialog
+                    }
+                });
+                break;
+            case 3:
+                textView.setText(context.getResources().getString(R.string.gridHistory));
+                imageButton.setImageResource(R.drawable.history_img);
+                imageButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(context,"3 GridItem clicked",Toast.LENGTH_LONG).show();
+                        Intent intent=new Intent(context,HistoryActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        context.startActivity(intent);
+                    }
+                });
+                break;
+        }
     }
 }
