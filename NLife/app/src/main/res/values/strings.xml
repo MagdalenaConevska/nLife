@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">NLife</string>
+
+    <string-array name="days_array">
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+        <item>Sunday</item>
+
+    </string-array>
+
+    <string name="btnDaily">Analyze daily intake</string>
+    <string name="btnWeekly">Analyze weekly intake</string>
+
+
 </resources>
