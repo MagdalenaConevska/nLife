@@ -25,7 +25,7 @@
             android:layout_marginBottom="@dimen/smallLettersBellow"
             android:layout_marginLeft="@dimen/bigLettersMargin"
             android:layout_marginTop="@dimen/bigLettersMargin"
-            android:textSize="@dimen/golemi"
+            android:textSize="@dimen/main"
             android:text="ProductName"/> <!-- samo za da se gleda izgledot, posle ke se izbrise i imeto ke se dodaa dinamicki-->
 
         <TextView
@@ -36,7 +36,7 @@
             android:textSize="@dimen/mali"
             android:layout_marginTop="@dimen/smallLettersBellow"
             android:layout_marginBottom="@dimen/smallLettersBellow"
-            android:layout_marginLeft="@dimen/bigLettersMargin"
+            android:layout_marginLeft="@dimen/smallLettersLeft"
             android:layout_below="@+id/productName"
             android:text="Nekoe dopolnitelno objasnuvanje za da ima nesto"
             />
@@ -67,7 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/tvAmount"
             android:layout_marginTop="@dimen/smallLettersBellow"
-            android:layout_marginLeft="@dimen/numberPickerMargin"
+            android:layout_marginLeft="@dimen/smallLettersLeft"
             android:solidColor="@color/rozeva"
             />
 
@@ -113,7 +113,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/rozeva"
-            android:layout_below="@+id/tvNutrients"></ListView>
+            android:layout_below="@+id/tvNutrients"
+            android:layout_marginLeft="@dimen/smallLettersLeft"></ListView>
 
     </RelativeLayout>
 
