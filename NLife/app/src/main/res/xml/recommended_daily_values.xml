@@ -1,0 +1,143 @@
+<!--
+CategoryID
+0:Infants
+1:< 4 Years
+2:Pregnant and Lactating Women
+3:> 4 Years
+-->
+<nutrients name="Nutrients">
+    <nutrient name="Protein" id="202" unit="g">
+        <categories>
+            <category id="0" value="" />
+            <category id="1" value="" />
+            <category id="2" value="" />
+            <category id="3" value="50" />
+        </categories>
+    </nutrient>
+    <nutrient name="Total lipid (fat)" id="204" unit="g">
+        <categories>
+            <category id="0" value="" />
+            <category id="1" value="" />
+            <category id="2" value="" />
+            <category id="3" value="65" />
+        </categories>
+    </nutrient>
+    <nutrient name="Carbohydrate" id="205" unit="g">
+        <categories>
+            <category id="0" value="" />
+            <category id="1" value="" />
+            <category id="2" value="" />
+            <category id="3" value="300" />
+        </categories>
+    </nutrient>
+    <nutrient name="Glucose" id="211" unit="">
+        <categories>
+            <category id="0" value="" />
+            <category id="1" value="" />
+            <category id="2" value="" />
+            <category id="3" value="" />
+        </categories>
+    </nutrient>
+    <nutrient name="Calcium" id="301" unit="mg">
+        <categories>
+            <category id="0" value="600" />
+            <category id="1" value="800" />
+            <category id="2" value="1300" />
+            <category id="3" value="1000" />
+        </categories>
+    </nutrient>
+    <nutrient name="Iron" id="303" unit="mg">
+        <categories>
+            <category id="0" value="15" />
+            <category id="1" value="10" />
+            <category id="2" value="18" />
+            <category id="3" value="18" />
+        </categories>
+    </nutrient>
+    <nutrient name="Magnesium" id="304" unit="mg">
+        <categories>
+            <category id="0" value="70" />
+            <category id="1" value="200" />
+            <category id="2" value="450" />
+            <category id="3" value="400" />
+        </categories>
+    </nutrient>
+    <nutrient name="Zinc" id="309" unit="mg">
+        <categories>
+            <category id="0" value="5" />
+            <category id="1" value="8" />
+            <category id="2" value="15" />
+            <category id="3" value="15" />
+        </categories>
+    </nutrient>
+    <nutrient name="Vitamin C" id="401" unit="mg">
+        <categories>
+            <category id="0" value="35" />
+            <category id="1" value="40" />
+            <category id="2" value="60" />
+            <category id="3" value="60" />
+        </categories>
+    </nutrient>
+    <nutrient name="Thiamin" id="404" unit="mg">
+        <categories>
+            <category id="0" value="0.5" />
+            <category id="1" value="0.7" />
+            <category id="2" value="1.7" />
+            <category id="3" value="1.5" />
+        </categories>
+    </nutrient>
+    <nutrient name="Riboflavin" id="405" unit="mg">
+        <categories>
+            <category id="0" value="0.6" />
+            <category id="1" value="0.8" />
+            <category id="2" value="2" />
+            <category id="3" value="1.7" />
+        </categories>
+    </nutrient>
+    <nutrient name="Niacin" id="406" unit="mg">
+        <categories>
+            <category id="0" value="8" />
+            <category id="1" value="9" />
+            <category id="2" value="20" />
+            <category id="3" value="20" />
+        </categories>
+    </nutrient>
+    <nutrient name="Vitamin B6" id="416" unit="mg">
+        <categories>
+            <category id="0" value="0.4" />
+            <category id="1" value="0.7" />
+            <category id="2" value="2.5" />
+            <category id="3" value="2" />
+        </categories>
+    </nutrient>
+    <nutrient name="Vitamin B12" id="418" unit="mcg">
+        <categories>
+            <category id="0" value="2" />
+            <category id="1" value="3" />
+            <category id="2" value="8" />
+            <category id="3" value="6" />
+        </categories>
+    </nutrient>
+    <nutrient name="Vitamin A" id="320" unit="IU">
+        <categories>
+            <category id="0" value="1500" />
+            <category id="1" value="2500" />
+            <category id="2" value="8000" />
+            <category id="3" value="5000" />
+        </categories>
+    </nutrient>
+    <nutrient name="Vitamin D" id="324" unit="IU">
+        <categories>
+            <category id="0" value="400" />
+            <category id="1" value="400" />
+            <category id="2" value="400" />
+            <category id="3" value="400" />
+        </categories>
+    </nutrient>
+    <nutrient name="Vitamin E" id="313" unit="IU"><categories>
+        <category id="0" value="5" />
+        <category id="1" value="10" />
+        <category id="2" value="30" />
+        <category id="3" value="30" />
+    </categories></nutrient>
+</nutrients>

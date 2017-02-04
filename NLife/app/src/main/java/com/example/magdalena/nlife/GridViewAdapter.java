@@ -87,6 +87,7 @@ public class GridViewAdapter extends BaseAdapter {
                     public void onClick(View v) {
                         Toast.makeText(context,"2 GridItem clicked",Toast.LENGTH_LONG).show();
                         //show dialog
+                        new GetRecommendedValues(context).execute(3);
                     }
                 });
                 break;
