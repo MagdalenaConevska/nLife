@@ -1,4 +1,4 @@
-package layout;
+package com.example.magdalena.nlife;
 
 import android.content.Context;
 import android.net.Uri;
@@ -8,17 +8,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.magdalena.nlife.R;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link ProductDetails.OnFragmentInteractionListener} interface
+ * {@link ProductDetailFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link ProductDetails#newInstance} factory method to
+ * Use the {@link ProductDetailFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ProductDetails extends Fragment {
+public class ProductDetailFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -30,7 +29,7 @@ public class ProductDetails extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public ProductDetails() {
+    public ProductDetailFragment() {
         // Required empty public constructor
     }
 
@@ -40,11 +39,11 @@ public class ProductDetails extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment ProductDetails.
+     * @return A new instance of fragment ProductDetailFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ProductDetails newInstance(String param1, String param2) {
-        ProductDetails fragment = new ProductDetails();
+    public static ProductDetailFragment newInstance(String param1, String param2) {
+        ProductDetailFragment fragment = new ProductDetailFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -65,7 +64,7 @@ public class ProductDetails extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_product_details, container, false);
+        return inflater.inflate(R.layout.fragment_product_detail, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event

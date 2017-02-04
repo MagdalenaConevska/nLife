@@ -11,20 +11,21 @@
     tools:context="com.example.magdalena.nlife.SearchActivity">
 
     <EditText
+        android:id="@+id/etSearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/etSearch"
-        android:background="#00ff99"
+        android:background="@color/zelena"
         android:padding="5dp"
         android:layout_marginBottom="15dp"
+
         android:hint="search" />
 
     <ListView
+        android:id="@+id/lvSearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/etSearch"
-        android:layout_marginTop="15dp"
-        android:textColor="#ff6666"
+        android:textColor="@color/rozeva"
+        android:layout_below="@+id/etSearch"
         ></ListView>
 
 

@@ -1,0 +1,120 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.magdalena.nlife.ProductDetailFragment">
+
+    <RelativeLayout
+        android:id="@+id/activity_search"
+        android:layout_width="match_parent"
+        android:layout_height="574dp"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        tools:context="com.example.magdalena.nlife.SearchActivity">
+
+
+
+
+        <TextView
+            android:id="@+id/productName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/zelena"
+            android:layout_marginBottom="@dimen/smallLettersBellow"
+            android:layout_marginLeft="@dimen/bigLettersMargin"
+            android:layout_marginTop="@dimen/bigLettersMargin"
+            android:textSize="@dimen/golemi"
+            android:text="ProductName"/> <!-- samo za da se gleda izgledot, posle ke se izbrise i imeto ke se dodaa dinamicki-->
+
+        <TextView
+            android:id="@+id/additionalInformation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/rozeva"
+            android:textSize="@dimen/mali"
+            android:layout_marginTop="@dimen/smallLettersBellow"
+            android:layout_marginBottom="@dimen/smallLettersBellow"
+            android:layout_marginLeft="@dimen/bigLettersMargin"
+            android:layout_below="@+id/productName"
+            android:text="Nekoe dopolnitelno objasnuvanje za da ima nesto"
+            />
+
+        <View
+            android:id="@+id/vLinija1"
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/additionalInformation"
+            android:layout_marginTop="@dimen/bigLettersMargin"
+            android:layout_marginBottom="@dimen/smallLettersBellow"
+            android:background="@color/zelena" />
+
+        <TextView
+            android:id="@+id/tvAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/zelena"
+            android:textSize="@dimen/golemi"
+            android:layout_margin="@dimen/bigLettersMargin"
+            android:layout_below="@+id/vLinija1"
+            android:text="Amount: "
+            />
+
+        <NumberPicker
+            android:id="@+id/numberPicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvAmount"
+            android:layout_marginTop="@dimen/smallLettersBellow"
+            android:layout_marginLeft="@dimen/numberPickerMargin"
+            android:solidColor="@color/rozeva"
+            />
+
+        <TextView
+            android:id="@+id/tvDecimalPoint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/zelena"
+            android:textSize="@dimen/golemi"
+            android:layout_toRightOf="@+id/numberPicker"
+            android:layout_below="@+id/tvAmount"
+            android:layout_marginTop="@dimen/decimalPointMarginTop"
+            android:layout_marginLeft="@dimen/decimalPointLeftRight"
+            android:layout_marginRight="@dimen/decimalPointLeftRight"
+            android:text=" . "
+            />
+
+        <NumberPicker
+            android:id="@+id/numberPickerDecimal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/tvDecimalPoint"
+            android:layout_below="@+id/tvAmount"
+            android:layout_marginTop="@dimen/smallLettersBellow"
+            android:solidColor="@color/rozeva"
+
+            />
+
+        <TextView
+            android:id="@+id/tvNutrients"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/zelena"
+            android:textSize="@dimen/golemi"
+            android:layout_marginBottom="@dimen/bigLettersMargin"
+            android:layout_marginLeft="@dimen/bigLettersMargin"
+            android:layout_marginTop="@dimen/bigLettersMargin"
+            android:layout_below="@+id/numberPicker"
+            android:text="Nutrients: "
+            />
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/rozeva"
+            android:layout_below="@+id/tvNutrients"></ListView>
+
+    </RelativeLayout>
+
+</FrameLayout>
