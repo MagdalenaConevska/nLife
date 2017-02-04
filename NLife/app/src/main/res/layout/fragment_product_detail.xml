@@ -61,13 +61,28 @@
             android:text="Amount: "
             />
 
+        <TextView
+        android:id="@+id/pleaseEnter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/rozeva"
+        android:textSize="@dimen/mali"
+        android:layout_marginTop="@dimen/smallLettersBellow"
+        android:layout_marginBottom="@dimen/bigLettersMargin"
+        android:layout_marginLeft="@dimen/smallLettersLeft"
+        android:layout_below="@+id/tvAmount"
+        android:text="Please enter the amount of food about which you would like to receive information."
+        />
+
+
+
         <NumberPicker
             android:id="@+id/numberPicker"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tvAmount"
+            android:layout_below="@+id/pleaseEnter"
             android:layout_marginTop="@dimen/smallLettersBellow"
-            android:layout_marginLeft="@dimen/smallLettersLeft"
+            android:layout_marginLeft="@dimen/numberPickerMargin"
             android:solidColor="@color/rozeva"
             />
 
@@ -78,7 +93,7 @@
             android:textColor="@color/zelena"
             android:textSize="@dimen/golemi"
             android:layout_toRightOf="@+id/numberPicker"
-            android:layout_below="@+id/tvAmount"
+            android:layout_below="@+id/pleaseEnter"
             android:layout_marginTop="@dimen/decimalPointMarginTop"
             android:layout_marginLeft="@dimen/decimalPointLeftRight"
             android:layout_marginRight="@dimen/decimalPointLeftRight"
@@ -90,7 +105,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/tvDecimalPoint"
-            android:layout_below="@+id/tvAmount"
+            android:layout_below="@+id/pleaseEnter"
             android:layout_marginTop="@dimen/smallLettersBellow"
             android:solidColor="@color/rozeva"
 
@@ -109,11 +124,25 @@
             android:text="Nutrients: "
             />
 
-        <ListView
+
+        <TextView
+            android:id="@+id/followingNutrients"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/rozeva"
+            android:textSize="@dimen/mali"
+            android:layout_marginTop="@dimen/smallLettersBellow"
+            android:layout_marginBottom="@dimen/bigLettersMargin"
+            android:layout_marginLeft="@dimen/smallLettersLeft"
             android:layout_below="@+id/tvNutrients"
+            android:text="The following nutrients are present in tohe food you selected: "
+            />
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/zelena"
+            android:layout_below="@+id/followingNutrients"
             android:layout_marginLeft="@dimen/smallLettersLeft"></ListView>
 
     </RelativeLayout>
