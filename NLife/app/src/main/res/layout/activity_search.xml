@@ -10,15 +10,33 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.magdalena.nlife.SearchActivity">
 
+
+
+    <Spinner
+        android:id="@+id/spinEnterCategory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:spinnerMode="dialog"
+        android:background="@color/zelena"
+        android:textColor="@color/rozeva"
+        android:layout_marginBottom="@dimen/mali"
+        android:padding="@dimen/mali"
+        />
+
     <EditText
         android:id="@+id/etSearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/zelena"
-        android:padding="5dp"
+        android:textColor="@color/rozeva"
+        android:padding="@dimen/mali"
         android:layout_marginBottom="15dp"
+        android:layout_below="@id/spinEnterCategory"
+        android:hint="Search..."
+        android:textColorHint="@color/rozeva"
 
-        android:hint="search" />
+        />
 
     <ListView
         android:id="@+id/lvSearch"
