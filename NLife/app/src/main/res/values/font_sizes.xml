@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="golemi">35dp</dimen>
+    <dimen name="main">40dp</dimen>
+    <dimen name="mali">16dp</dimen>
+    <dimen name="bigLettersMargin">25dp</dimen>
+    <dimen name="smallLettersBellow">6dp</dimen>
+    <dimen name="smallLettersLeft">40dp</dimen>
+    <dimen name="numberPickerMargin">75dp</dimen>
+    <dimen name="decimalPointMarginTop">85dp</dimen>
+    <dimen name="decimalPointLeftRight">11dp</dimen>
+
+</resources>

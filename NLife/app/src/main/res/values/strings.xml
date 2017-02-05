@@ -13,6 +13,36 @@
 
     </string-array>
 
+    <string-array name="categories_array">
+        <item>Choose category...</item>
+        <item>American Indian/Alaska Native Foods</item>
+        <item>Baby Foods</item>
+        <item>Baked Products</item>
+        <item>Beef Products</item>
+        <item>Beverages</item>
+        <item>Breakfast Cereals</item>
+        <item>Cereal Grains and Pasta</item>
+        <item>Dairy and Egg Products</item>
+        <item>Fast Foods</item>
+        <item>Fats and Oils</item>
+        <item>Finfish and Shellfish Products</item>
+        <item>Fruits and Fruit Juices</item>
+        <item>Lamb, Veal, and Game Products</item>
+        <item>Legumes and Legume Products</item>
+        <item>Meals, Entrees, and Side Dishes</item>
+        <item>Nut and Seed Products</item>
+        <item>Pork Products</item>
+        <item>Poultry Products</item>
+        <item>Restaurant Foods</item>
+        <item>Sausages and Luncheon Meats</item>
+        <item>Snacks</item>
+        <item>Soups, Sauces, and Gravies</item>
+        <item>Spices and Herbs</item>
+        <item>Sweets</item>
+        <item>Vegetables and Vegetable Products</item>
+
+    </string-array>
+
     <string name="btnDaily">Analyze daily intake</string>
     <string name="btnWeekly">Analyze weekly intake</string>
 
@@ -24,5 +54,8 @@
     <string name="gridDaily">Daily intake</string>
     <string name="gridFive">5 a day</string>
     <string name="gridHistory">History</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
