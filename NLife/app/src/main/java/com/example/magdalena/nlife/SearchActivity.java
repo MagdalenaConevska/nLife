@@ -16,6 +16,10 @@ public class SearchActivity extends MasterActivity {
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
 
+        //ova e za da proveram dali funkcionira :D
+        new GetRecipes().execute();
+
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
