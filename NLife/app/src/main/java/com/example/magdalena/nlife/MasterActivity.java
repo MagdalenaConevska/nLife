@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -25,8 +26,15 @@ public class MasterActivity extends AppCompatActivity {
         mActionBar.setDisplayShowCustomEnabled(true);
         mActionBar.setCustomView(mCustomView, new ActionBar.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         mActionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        ImageButton homeMenuButton=(ImageButton)this.findViewById(R.id.homeMenuButton);
+        /*ImageButton homeMenuButton=(ImageButton)this.findViewById(R.id.homeMenuButton);
         homeMenuButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplication(),HomeActivity.class));
+            }
+        });*/
+        Button homeButton=(Button)this.findViewById(R.id.homeButton);
+        homeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplication(),HomeActivity.class));

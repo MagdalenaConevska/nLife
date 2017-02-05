@@ -4,6 +4,8 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+
+    <!--
     <LinearLayout android:id="@+id/layout1"
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -18,12 +20,14 @@
             android:id="@+id/appName" />
 
     </LinearLayout>
+    -->
 
     <LinearLayout android:id="@+id/layout2"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <!--
         <ImageButton
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -31,11 +35,25 @@
             android:background="@null"
             app:srcCompat="@drawable/ic_home_white_24dp"
             android:id="@+id/homeMenuButton" />
+            -->
+
+        <Button
+            android:layout_width="0dp"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:layout_gravity="center_vertical"
+            android:background="@null"
+            android:id="@+id/homeButton"
+            android:text="@string/app_name"
+            android:layout_weight="1"
+            android:textAllCaps="false"
+            android:layout_height="wrap_content" />
 
         <ImageButton
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:background="@null"
             app:srcCompat="@drawable/ic_search_white_24dp"
             android:id="@+id/searchMenuButton" />
@@ -44,6 +62,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:background="@null"
             app:srcCompat="@drawable/ic_history_white_24dp"
             android:id="@+id/historyMenuButton" />
