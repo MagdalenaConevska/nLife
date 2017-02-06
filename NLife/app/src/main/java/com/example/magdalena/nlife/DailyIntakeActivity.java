@@ -23,6 +23,7 @@ public class DailyIntakeActivity extends  MasterActivity  {
         GraphView graph = (GraphView) findViewById(R.id.graph);
 
 
+
         BarGraphSeries<DataPoint> series = new BarGraphSeries<>(new DataPoint[] {
                 new DataPoint(0, -1),
                 new DataPoint(1, 5),

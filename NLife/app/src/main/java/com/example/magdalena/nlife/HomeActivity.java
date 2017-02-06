@@ -16,6 +16,9 @@ public class HomeActivity extends MasterActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+
+
+
         GridView gridView=(GridView)this.findViewById(R.id.gridView);
         GridViewAdapter gridViewAdapter=new GridViewAdapter(getApplicationContext());
         gridView.setAdapter(gridViewAdapter);
