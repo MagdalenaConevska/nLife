@@ -2,6 +2,7 @@ package com.example.magdalena.nlife;
 
 import android.content.Context;
 import android.content.Intent;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -86,8 +87,29 @@ public class GridViewAdapter extends BaseAdapter {
                     @Override
                     public void onClick(View v) {
                         Toast.makeText(context,"2 GridItem clicked",Toast.LENGTH_LONG).show();
-                        //show dialog
-                        new GetRecommendedValues(context).execute(3);
+                        //show dialog instead of next code
+                        int age=Integer.parseInt(PreferenceManager.getDefaultSharedPreferences(context).getString(context.getResources().getString(R.string.pref_age_key),context.getResources().getString(R.string.pref_age_defaultValue)));
+                        String gender=PreferenceManager.getDefaultSharedPreferences(context).getString(context.getResources().getString(R.string.pref_gender_key),context.getResources().getString(R.string.pref_gender_defaultValue));
+                        int category=0;
+                        if(age==0 || age==1) {
+                            category = 0;
+                        }
+                        else if(age<4) {
+                            category = 1;
+                        }
+                        else {
+                            if (gender.equals(context.getResources().getString(R.string.male))) {
+                                category = 3;
+                            } else {
+                                boolean pregnancy = PreferenceManager.getDefaultSharedPreferences(context).getBoolean(context.getResources().getString(R.string.pref_pr_key), false);
+                                if (pregnancy) {
+                                    category = 2;
+                                } else {
+                                    category = 3;
+                                }
+                            }
+                        }
+                        new GetRecommendedValues(context).execute(category);
                     }
                 });
                 break;

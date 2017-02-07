@@ -54,5 +54,12 @@ public class MasterActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplication(),HistoryActivity.class));
             }
         });
+        ImageButton settingsMenuButton=(ImageButton)this.findViewById(R.id.settingsMenuButton);
+        settingsMenuButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplication(),SettingsActivity.class));
+            }
+        });
     }
 }

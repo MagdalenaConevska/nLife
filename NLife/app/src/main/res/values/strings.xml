@@ -58,4 +58,28 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <string name="pref_age_summary">Enter your age</string>
+    <string name="pref_age_title">Age</string>
+    <string name="pref_age_key">pref_age</string>
+    <string name="pref_age_defaultValue">21</string>
+    <string-array name="pref_gender_titles">
+        <item>Female</item>
+        <item>Male</item>
+    </string-array>
+    <string-array name="pref_gender_values">
+        <item>female</item>
+        <item>male</item>
+    </string-array>
+    <string name="pref_gender_key">pref_gender</string>
+    <string name="pref_gender_title">Gender</string>
+    <string name="pref_gender_defaultValue">female</string>
+    <string name="pref_gender_summary">Select your gender</string>
+    <string name="pref_pr_key">pref_pr</string>
+    <string name="pref_pr_title">Pregnant</string>
+    <string name="pref_pr_summary">Pregnancy status (female only)</string>
+    <string name="pref_pr_defaultValue">false</string>
+
+    <string name="male">male</string>
+    <string name="female">female</string>
+
 </resources>

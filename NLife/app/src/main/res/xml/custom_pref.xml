@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <EditTextPreference
+        android:key="@string/pref_age_key"
+        android:title="@string/pref_age_title"
+        android:summary="@string/pref_age_summary"
+        android:defaultValue="@string/pref_age_defaultValue" />
+    <ListPreference
+        android:key="@string/pref_gender_key"
+        android:title="@string/pref_gender_title"
+        android:defaultValue="@string/pref_gender_defaultValue"
+        android:entries="@array/pref_gender_titles"
+        android:entryValues="@array/pref_gender_values"
+        android:summary="@string/pref_gender_summary" />
+    <CheckBoxPreference
+        android:key="@string/pref_pr_key"
+        android:title="@string/pref_pr_title"
+        android:summary="@string/pref_pr_summary"
+        android:defaultValue="@string/pref_pr_defaultValue" />
+</PreferenceScreen>

@@ -67,6 +67,15 @@
             app:srcCompat="@drawable/ic_history_white_24dp"
             android:id="@+id/historyMenuButton" />
 
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@null"
+            app:srcCompat="@drawable/ic_settings_white_24dp"
+            android:id="@+id/settingsMenuButton" />
+
     </LinearLayout>
 
 </LinearLayout>
