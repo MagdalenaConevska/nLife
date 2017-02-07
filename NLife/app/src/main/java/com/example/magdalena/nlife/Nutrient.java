@@ -6,13 +6,15 @@ package com.example.magdalena.nlife;
 
 public class Nutrient {
     String name;
-    Float recorded;
+    Double recorded;
+    String unit;
 
     public Nutrient(){}
 
-    public Nutrient(String name, Float recorded){
+    public Nutrient(String name, Double recorded, String unit){
 
         this.name = name;
         this.recorded = recorded;
+        this.unit = unit;
     }
 }

@@ -3,10 +3,16 @@ package com.example.magdalena.nlife;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by Magdalena on 2/6/2017.
@@ -20,6 +26,9 @@ public class GetReport extends AsyncTask<Void,Void,Void> {
         String apiUrl="https://api.nal.usda.gov/ndb/reports/?ndbno=";
         String apiKey="UMfhmQAzbJrzs6Ae872mqxrHB6SrHk54r18SMKMC";
         String ndbno="01009";
+
+        static JSONObject jsonObject;
+       ArrayList<Nutrient> lista = new ArrayList<>();
 
         @Override
         protected Void doInBackground(Void... params) {
@@ -48,6 +57,24 @@ public class GetReport extends AsyncTask<Void,Void,Void> {
                 Log.e("ERROR", e.getMessage(), e);
 
             }
+
+            try{
+                jsonObject = new JSONObject(result);
+                JSONObject food = jsonObject.getJSONObject("food");
+                JSONArray nutrients = food.getJSONArray("nutrients");
+                for(int i=0; i<nutrients.length(); i++){
+
+                    JSONObject one = nutrients.getJSONObject(i);
+                    String name = one.getString("name");
+                    String unit = one.getString("unit");
+                    Double value = one.getDouble("value");
+                    Nutrient n = new Nutrient(name, value, unit);
+                    lista.add(n);
+                }
+            }catch (JSONException e){
+                Log.e("JSONParser", e.getMessage(), e);
+            }
+
             return null;
         }
     }
