@@ -20,7 +20,7 @@
         android:spinnerMode="dialog"
         android:background="@color/zelena"
         android:textColor="@color/rozeva"
-        android:layout_marginBottom="@dimen/mali"
+        android:layout_marginBottom="@dimen/smallLettersBellow"
         android:padding="@dimen/mali"
         />
 
@@ -29,13 +29,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/zelena"
-        android:textColor="@color/rozeva"
+        android:textColor="@color/white"
         android:padding="@dimen/mali"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="@dimen/smallLettersBellow"
         android:layout_below="@id/spinEnterCategory"
         android:hint="Search..."
-        android:textColorHint="@color/rozeva"
+        android:textColorHint="@color/white"
 
+        />
+
+
+    <Button
+        android:id="@+id/btnSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etSearch"
+        android:background="@color/zelena"
+        android:textColor="@color/white"
+        android:padding="@dimen/mali"
+        android:layout_marginBottom="15dp"
+        android:text="SEARCH"
         />
 
     <ListView
@@ -43,7 +56,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/rozeva"
-        android:layout_below="@+id/etSearch"
+        android:layout_below="@+id/btnSearch"
         ></ListView>
 
 
