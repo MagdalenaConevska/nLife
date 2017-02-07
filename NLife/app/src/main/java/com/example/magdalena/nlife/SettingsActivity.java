@@ -43,10 +43,13 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
     }
 
     private void checkValidity(){
-        String gender=PreferenceManager.getDefaultSharedPreferences(this).getString("pref_gender","female");
+        String gender=PreferenceManager.getDefaultSharedPreferences(this).getString(getApplicationContext().getResources().getString(R.string.pref_gender_key),getApplicationContext().getResources().getString(R.string.pref_gender_defaultValue));
         Log.d("Settings1Activity",gender);
-        if(!gender.equals("female")) {
-            getPreferenceScreen().findPreference("pref_pr").setEnabled(false);
+        if(!gender.equals(getApplicationContext().getResources().getString(R.string.female))) {
+            getPreferenceScreen().findPreference(getApplicationContext().getResources().getString(R.string.pref_pr_key)).setEnabled(false);
+        }
+        else{
+            getPreferenceScreen().findPreference(getApplicationContext().getResources().getString(R.string.pref_pr_key)).setEnabled(true);
         }
     }
 
