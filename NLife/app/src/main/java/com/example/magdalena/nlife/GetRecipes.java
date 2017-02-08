@@ -61,7 +61,7 @@ public class GetRecipes extends AsyncTask<Void,Void,Void> {
             //parsing
             try{
                 jsonObject = new JSONObject(result);
-                JSONArray item = jsonObject.getJSONArray("item");
+                JSONArray item = jsonObject.getJSONObject("list").getJSONArray("item");
                 for(int i=0; i<item.length(); i++){
 
                     JSONObject one = item.getJSONObject(i);
