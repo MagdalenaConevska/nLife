@@ -81,5 +81,6 @@
 
     <string name="male">male</string>
     <string name="female">female</string>
+    <string name="regex">^\\d+$</string>
 
 </resources>
