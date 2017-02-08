@@ -6,27 +6,35 @@ CategoryID
 3:> 4 Years
 -->
 <nutrients name="Nutrients">
+    <nutrient name="Energy" id="208" unit="kcal">
+        <categories>
+            <category id="0" value="900" />
+            <category id="1" value="1000" />
+            <category id="2" value="300" />
+            <category id="3" value="8700" />
+        </categories>
+    </nutrient>
     <nutrient name="Protein" id="202" unit="g">
         <categories>
-            <category id="0" value="" />
-            <category id="1" value="" />
-            <category id="2" value="" />
+            <category id="0" value="9" />
+            <category id="1" value="13" />
+            <category id="2" value="60" />
             <category id="3" value="50" />
         </categories>
     </nutrient>
     <nutrient name="Total lipid (fat)" id="204" unit="g">
         <categories>
-            <category id="0" value="" />
-            <category id="1" value="" />
-            <category id="2" value="" />
+            <category id="0" value="30" />
+            <category id="1" value="30" />
+            <category id="2" value="60" />
             <category id="3" value="65" />
         </categories>
     </nutrient>
     <nutrient name="Carbohydrate" id="205" unit="g">
         <categories>
-            <category id="0" value="" />
-            <category id="1" value="" />
-            <category id="2" value="" />
+            <category id="0" value="60" />
+            <category id="1" value="95" />
+            <category id="2" value="175" />
             <category id="3" value="300" />
         </categories>
     </nutrient>
@@ -35,7 +43,7 @@ CategoryID
             <category id="0" value="" />
             <category id="1" value="" />
             <category id="2" value="" />
-            <category id="3" value="" />
+            <category id="3" value="90" />
         </categories>
     </nutrient>
     <nutrient name="Calcium" id="301" unit="mg">
@@ -134,10 +142,12 @@ CategoryID
             <category id="3" value="400" />
         </categories>
     </nutrient>
-    <nutrient name="Vitamin E" id="313" unit="IU"><categories>
+    <nutrient name="Vitamin E" id="313" unit="IU">
+        <categories>
         <category id="0" value="5" />
         <category id="1" value="10" />
         <category id="2" value="30" />
         <category id="3" value="30" />
-    </categories></nutrient>
+        </categories>
+    </nutrient>
 </nutrients>
