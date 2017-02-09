@@ -23,7 +23,7 @@ public class GetRecipesService extends Service {
         super.onCreate();
         Toast.makeText(this, "Service started", Toast.LENGTH_LONG).show();
         Log.d("GetRecipesService","Service started");
-        new GetRecipes(this).execute();
+        //new GetRecipes(this).execute();
 
     }
 
@@ -37,6 +37,7 @@ public class GetRecipesService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Toast.makeText(this, "onStartCommand", Toast.LENGTH_LONG).show();
+        new GetRecipes(this).execute();
         return super.onStartCommand(intent, flags, startId);
 
     }
