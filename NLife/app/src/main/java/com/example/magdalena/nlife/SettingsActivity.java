@@ -1,6 +1,7 @@
 package com.example.magdalena.nlife;
 
 import android.content.SharedPreferences;
+import android.preference.EditTextPreference;
 import android.preference.PreferenceActivity;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -55,7 +56,20 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        Log.d("Settings1Activity","onSharedPreferenceChanged called");
-        checkValidity();
+        Log.d("Settings1Activity",key);
+        if(key.equals(getApplicationContext().getResources().getString(R.string.pref_gender_key))) {
+            checkValidity();
+        }
+        else if(key.equals(getApplicationContext().getResources().getString(R.string.pref_age_key))) {
+            String age=sharedPreferences.getString(getApplicationContext().getResources().getString(R.string.pref_age_key), getApplicationContext().getResources().getString(R.string.pref_age_defaultValue));
+            if(!age.matches(getString(R.string.regex))) {
+                Log.d("Settings1Activity","NaN");
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString(getApplicationContext().getResources().getString(R.string.pref_age_key), getApplicationContext().getResources().getString(R.string.pref_age_defaultValue));
+                editor.apply();
+                EditTextPreference myPrefText = (EditTextPreference) findPreference(getApplicationContext().getResources().getString(R.string.pref_age_key));
+                myPrefText.setText(getApplicationContext().getResources().getString(R.string.pref_age_defaultValue));
+            }
+        }
     }
 }
