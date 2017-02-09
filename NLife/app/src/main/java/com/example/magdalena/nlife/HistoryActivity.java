@@ -12,8 +12,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 public class HistoryActivity extends  MasterActivity  {
@@ -24,8 +27,9 @@ public class HistoryActivity extends  MasterActivity  {
     BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            ArrayList<Nutrient>lista=(ArrayList<Nutrient>)intent.getExtras().get("Nutrients");
+            lista=(ArrayList<Nutrient>)intent.getExtras().get("Nutrients");
             Log.d("HistoryActivity","Broadcast received");
+            Toast.makeText(getApplicationContext(),"Broadcast received",Toast.LENGTH_LONG).show();
         }
     };
 
@@ -92,10 +96,13 @@ public class HistoryActivity extends  MasterActivity  {
         // ArrayList<Nutrient> lista=new ArrayList<>();
 
         String name="apple";
-        String datum="09.02.2017";
-        String ndbno="01009";
+        //String datum="09.02.2017";
+        String ndbno="01008";
         int kolichina=2;
 
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy EEEE");
+        String datum = df.format(c.getTime());
 
         double protein=0,lipid=0,carbo=0,glucose=0,calcium=0;
         double iron=0,mg=0,zinc=0,vitC=0,thiamin=0,ribo=0;
