@@ -148,16 +148,25 @@ public class SearchActivity extends MasterActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 //make fragment transaction
+                ConnectivityManager cm=(ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+                boolean isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
+                if(isConnected) {
 
-
-                ProductDetailFragment fragment = new ProductDetailFragment();
-                FragmentManager fragmentManager = getFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.activity_search, fragment);
-                fragmentTransaction.commit();
-                Button btn = (Button)findViewById(R.id.btnSearch);
-                btn.setVisibility(View.INVISIBLE);
-                //inside the new fragment construct the design according to the choice
+                    ProductDetailFragment fragment = new ProductDetailFragment();
+                    FragmentManager fragmentManager = getFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.activity_search, fragment);
+                    fragmentTransaction.commit();
+                    Button btn = (Button) findViewById(R.id.btnSearch);
+                    btn.setVisibility(View.INVISIBLE);
+                    //inside the new fragment construct the design according to the choice
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "Device is not connected to internet. " +
+                            "Internet connection is needed in order to get the info. " +
+                            "Please connect your device to internet.", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
