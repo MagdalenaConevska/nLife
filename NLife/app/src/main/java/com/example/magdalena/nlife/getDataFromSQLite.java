@@ -49,32 +49,21 @@ public class getDataFromSQLite extends AsyncTask<Void,Void,Void> {
 
         if (cursor != null) {
 
+            cursor.moveToFirst();
             int size = cursor.getCount();
             for (int i = 0; i < size; i++) {
-
-
-
-
-                    cursor.moveToFirst();
-                    Tuple torka = new Tuple(cursor.getString(0), cursor.getString(1), cursor.getString(2),
-                            cursor.getInt(3), cursor.getDouble(4), cursor.getDouble(5), cursor.getDouble(6),
-                            cursor.getDouble(7), cursor.getDouble(8), cursor.getDouble(9), cursor.getDouble(10), cursor.getDouble(11),
-                            cursor.getDouble(12), cursor.getDouble(13), cursor.getDouble(14), cursor.getDouble(15), cursor.getDouble(16),
-                            cursor.getDouble(17), cursor.getDouble(18), cursor.getDouble(19), cursor.getDouble(20));
-
-
-                    torki.add(torka);
-
-
+                Tuple torka = new Tuple(cursor.getString(0), cursor.getString(1), cursor.getString(2),
+                        cursor.getInt(3), cursor.getDouble(4), cursor.getDouble(5), cursor.getDouble(6),
+                        cursor.getDouble(7), cursor.getDouble(8), cursor.getDouble(9), cursor.getDouble(10), cursor.getDouble(11),
+                        cursor.getDouble(12), cursor.getDouble(13), cursor.getDouble(14), cursor.getDouble(15), cursor.getDouble(16),
+                        cursor.getDouble(17), cursor.getDouble(18), cursor.getDouble(19), cursor.getDouble(20));
+                torki.add(torka);
+                cursor.moveToNext();
             }
         }
-            return null;
 
-        }
-
-
-
-
+        return null;
 
     }
 
+}

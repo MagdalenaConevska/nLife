@@ -18,8 +18,8 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:spinnerMode="dialog"
-        android:background="@color/zelena"
-        android:textColor="@color/rozeva"
+        android:background="@color/color2"
+        android:textColor="@color/color1"
         android:layout_marginBottom="@dimen/smallLettersBellow"
         android:padding="@dimen/mali"
         />
@@ -28,7 +28,7 @@
         android:id="@+id/etSearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/zelena"
+        android:background="@color/color2"
         android:textColor="@color/white"
         android:padding="@dimen/mali"
         android:layout_marginBottom="@dimen/smallLettersBellow"
@@ -44,9 +44,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/etSearch"
-        android:background="@color/zelena"
+        android:background="@color/color2"
         android:textColor="@color/white"
         android:padding="@dimen/mali"
+        android:textAllCaps="false"
         android:layout_marginBottom="15dp"
         android:text="SEARCH"
         />
@@ -55,9 +56,9 @@
         android:id="@+id/lvSearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/rozeva"
+        android:textColor="@color/color1"
         android:layout_below="@+id/btnSearch"
-        ></ListView>
+        />
 
 
 </RelativeLayout>

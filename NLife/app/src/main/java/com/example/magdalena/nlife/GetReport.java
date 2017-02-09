@@ -31,11 +31,13 @@ public class GetReport extends AsyncTask<Void,Void,Void> {
     }
 
 
-    String result="";
+        String result="";
+
 
         String apiUrl="https://api.nal.usda.gov/ndb/reports/?ndbno=";
         String apiKey="UMfhmQAzbJrzs6Ae872mqxrHB6SrHk54r18SMKMC";
         String ndbno="01009";
+        String nut="&nutrients=208";
 
         static JSONObject jsonObject;
        ArrayList<Nutrient> lista = new ArrayList<>();
@@ -43,7 +45,7 @@ public class GetReport extends AsyncTask<Void,Void,Void> {
         @Override
         protected Void doInBackground(Void... params) {
             try {
-                URL url = new URL(apiUrl + ndbno + "&type=f&format=json&api_key=" + apiKey);
+                URL url = new URL(apiUrl + ndbno + nut +"&type=f&format=json&api_key=" + apiKey);
                 HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
                 try {
                     BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
@@ -68,7 +70,9 @@ public class GetReport extends AsyncTask<Void,Void,Void> {
 
             }
 
+
             TreeSet<String> set=new TreeSet<>();
+
             set.add("203");
             set.add("204");
             set.add("205");
@@ -113,7 +117,6 @@ public class GetReport extends AsyncTask<Void,Void,Void> {
             intent.setAction("GetReportNutrients");
             intent.putExtra("Nutrients",lista);
             context.sendBroadcast(intent);
-
 
             return null;
         }

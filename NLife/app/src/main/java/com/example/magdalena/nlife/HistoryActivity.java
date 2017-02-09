@@ -89,12 +89,12 @@ public class HistoryActivity extends  MasterActivity  {
 
         //samo da se prezeme vistinskata lista, name,datum,ndbno i kolichina! dr e ok
 
-           // ArrayList<Nutrient> lista=new ArrayList<>();
+        // ArrayList<Nutrient> lista=new ArrayList<>();
 
-            String name="apple";
-            String datum="09.02.2017";
-            String ndbno="01009";
-            int kolichina=2;
+        String name="apple";
+        String datum="09.02.2017";
+        String ndbno="01009";
+        int kolichina=2;
 
 
         double protein=0,lipid=0,carbo=0,glucose=0,calcium=0;
@@ -106,7 +106,7 @@ public class HistoryActivity extends  MasterActivity  {
 
             if(lista.get(i).name.equals("Protein")){
 
-              protein=lista.get(i).recorded;
+                protein=lista.get(i).recorded;
             }
             else if (lista.get(i).name.equals("Total lipid (fat)")){
 
