@@ -13,7 +13,7 @@ public class NutrientDBEntry implements BaseColumns {
     public static final String COLUMN_NDBNO = "ndbno";
     public static final String COLUMN_PRODUCT_NAME = "productName";
     public static final String COLUMN_QUANTITY = "quantity";
-    public static final String COLUMN_ENERGY = "energy";
+   // public static final String COLUMN_ENERGY = "energy";
     public static final String COLUMN_PROTEIN = "protein";
     public static final String COLUMN_TOTAL_LIPID = "totalLipid";
     public static final String COLUMN_CARBOHYDRATE = "carbohydrate";

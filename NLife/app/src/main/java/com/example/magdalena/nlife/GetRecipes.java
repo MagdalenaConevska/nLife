@@ -49,6 +49,8 @@ public class GetRecipes extends AsyncTask<Void,Void,Void> {
                     result=stringBuilder.toString();
                     // return stringBuilder.toString();
                     Log.d("Hoorayy","Response from url: "+result);
+
+
                 }
                 finally{
                     urlConnection.disconnect();

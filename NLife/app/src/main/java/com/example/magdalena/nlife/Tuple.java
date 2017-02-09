@@ -28,6 +28,10 @@ public class Tuple {
     public double vitaminD;
     public double vitaminE;
 
+    public Tuple(){
+
+
+    }
 
     public Tuple(String name, String date, String id, int quantity, double protein, double lipid, double carbohydrate, double glucose, double calcium, double iron, double magnesium, double zinc, double vitaminC, double thiamin, double ribofavin, double niacin, double vitaminB6, double vitaminB12, double vitaminA, double vitaminD, double vitaminE) {
         this.name = name;

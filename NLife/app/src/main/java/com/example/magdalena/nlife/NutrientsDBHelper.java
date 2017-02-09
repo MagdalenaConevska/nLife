@@ -19,7 +19,7 @@ public class NutrientsDBHelper extends SQLiteOpenHelper {
             NutrientDBEntry.COLUMN_NDBNO + " TEXT NOT NULL," +
             NutrientDBEntry.COLUMN_PRODUCT_NAME + " TEXT," +
             NutrientDBEntry.COLUMN_QUANTITY + " INTEGER," +
-            NutrientDBEntry.COLUMN_ENERGY + " REAL," +
+           // NutrientDBEntry.COLUMN_ENERGY + " REAL," +
             NutrientDBEntry.COLUMN_PROTEIN + " REAL," +
             NutrientDBEntry.COLUMN_TOTAL_LIPID + " REAL," +
             NutrientDBEntry.COLUMN_CARBOHYDRATE + " REAL," +

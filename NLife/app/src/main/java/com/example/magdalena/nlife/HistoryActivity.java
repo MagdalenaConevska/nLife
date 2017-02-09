@@ -14,18 +14,22 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class HistoryActivity extends  MasterActivity  {
 
     ArrayList<Nutrient>lista;
 
+
     BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            lista=(ArrayList<Nutrient>)intent.getExtras().get("Nutrients");
+            ArrayList<Nutrient>lista=(ArrayList<Nutrient>)intent.getExtras().get("Nutrients");
             Log.d("HistoryActivity","Broadcast received");
         }
     };
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,10 +46,11 @@ public class HistoryActivity extends  MasterActivity  {
 // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
 
-
         new GetReport(getApplicationContext()).execute();
 
+
     }
+
 
     @Override
     protected void onResume() {
@@ -62,6 +67,8 @@ public class HistoryActivity extends  MasterActivity  {
         unregisterReceiver(broadcastReceiver);
         Log.d("HistoryActivity","Broadcast unregistered");
     }
+
+
 
     public void startDailyIntakeActivity(View v){
 
@@ -82,7 +89,7 @@ public class HistoryActivity extends  MasterActivity  {
 
         //samo da se prezeme vistinskata lista, name,datum,ndbno i kolichina! dr e ok
 
-       // ArrayList<Nutrient> lista=new ArrayList<>();
+        // ArrayList<Nutrient> lista=new ArrayList<>();
 
         String name="apple";
         String datum="09.02.2017";
@@ -206,6 +213,7 @@ public class HistoryActivity extends  MasterActivity  {
 
 
     }
+
 
 
 }

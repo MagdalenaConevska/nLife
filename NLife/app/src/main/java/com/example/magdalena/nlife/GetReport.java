@@ -30,7 +30,12 @@ public class GetReport extends AsyncTask<Void,Void,Void> {
         context = c;
     }
 
+<<<<<<< HEAD
         String result="";
+=======
+
+    String result="";
+>>>>>>> e1b86c2a92512b77bfe86982eca3beb3e9c973ac
 
         String apiUrl="https://api.nal.usda.gov/ndb/reports/?ndbno=";
         String apiKey="UMfhmQAzbJrzs6Ae872mqxrHB6SrHk54r18SMKMC";
@@ -68,7 +73,11 @@ public class GetReport extends AsyncTask<Void,Void,Void> {
 
             }
 
+<<<<<<< HEAD
             TreeSet<String>set=new TreeSet<>();
+=======
+            TreeSet<String> set=new TreeSet<>();
+>>>>>>> e1b86c2a92512b77bfe86982eca3beb3e9c973ac
             set.add("202");
             set.add("204");
             set.add("205");
@@ -87,6 +96,10 @@ public class GetReport extends AsyncTask<Void,Void,Void> {
             set.add("324");
             set.add("323");
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> e1b86c2a92512b77bfe86982eca3beb3e9c973ac
             try{
                 jsonObject = new JSONObject(result);
                 JSONObject food = jsonObject.getJSONObject("report").getJSONObject("food");
@@ -100,6 +113,10 @@ public class GetReport extends AsyncTask<Void,Void,Void> {
                         String unit = one.getString("unit");
                         Double value = one.getDouble("value");
                         Nutrient n = new Nutrient(name, value, unit);
+<<<<<<< HEAD
+=======
+
+>>>>>>> e1b86c2a92512b77bfe86982eca3beb3e9c973ac
                         lista.add(n);
                     }
                 }
@@ -112,6 +129,10 @@ public class GetReport extends AsyncTask<Void,Void,Void> {
             intent.putExtra("Nutrients",lista);
             context.sendBroadcast(intent);
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> e1b86c2a92512b77bfe86982eca3beb3e9c973ac
             return null;
         }
     }

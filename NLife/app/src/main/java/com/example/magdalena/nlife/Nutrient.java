@@ -7,7 +7,7 @@ import android.os.Parcelable;
  * Created by Marija on 2/6/2017.
  */
 
-public class Nutrient implements Parcelable{
+public class Nutrient implements Parcelable {
     String name;
     Double recorded;
     String unit;
@@ -20,6 +20,8 @@ public class Nutrient implements Parcelable{
         this.recorded = recorded;
         this.unit = unit;
     }
+
+
 
     protected Nutrient(Parcel in) {
         name = in.readString();
@@ -50,4 +52,6 @@ public class Nutrient implements Parcelable{
         dest.writeString(unit);
         dest.writeDouble(recorded);
     }
+
+
 }
