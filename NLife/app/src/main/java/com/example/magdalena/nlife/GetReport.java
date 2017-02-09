@@ -71,9 +71,6 @@ public class GetReport extends AsyncTask<Void,Void,Void> {
         TreeSet<String> set=new TreeSet<>();
 
         set.add("203");
-
-
-        set.add("202");
         set.add("204");
         set.add("205");
         set.add("211");

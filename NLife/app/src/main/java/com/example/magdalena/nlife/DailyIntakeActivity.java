@@ -22,8 +22,21 @@ public class DailyIntakeActivity extends  MasterActivity  {
 
         GraphView graph = (GraphView) findViewById(R.id.graph);
 
+        //koga se kreira ova aktiviti ni treba obrabotka od baza
 
 
+
+
+
+
+
+
+
+
+
+
+
+/*
         BarGraphSeries<DataPoint> series = new BarGraphSeries<>(new DataPoint[] {
                 new DataPoint(0, -1),
                 new DataPoint(1, 5),
@@ -48,13 +61,14 @@ public class DailyIntakeActivity extends  MasterActivity  {
 // draw values on top
         series.setDrawValuesOnTop(true);
         series.setValuesOnTopColor(Color.RED);
-
+*/
      /*   StaticLabelsFormatter staticLabelsFormatter = new StaticLabelsFormatter(graph);
         staticLabelsFormatter.setHorizontalLabels(new String[] {"CH", "F", "Pr","Mi"});
         graph.getGridLabelRenderer().setLabelFormatter(staticLabelsFormatter);
+        ova si beshe vo komentar
 */
-
+ /*
         graph.getLegendRenderer().setVisible(true);
-        graph.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.TOP);
+        graph.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.TOP); */
     }
 }

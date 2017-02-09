@@ -24,8 +24,8 @@ public class HistoryActivity extends  MasterActivity  {
     BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            ArrayList<Nutrient>lista=(ArrayList<Nutrient>)intent.getExtras().get("Nutrients");
-            Log.d("HistoryActivity","Broadcast received");
+            lista=(ArrayList<Nutrient>)intent.getExtras().get("Nutrients");
+            Log.d("HistoryActivity",lista.get(0).name);
         }
     };
 
@@ -91,18 +91,24 @@ public class HistoryActivity extends  MasterActivity  {
 
         // ArrayList<Nutrient> lista=new ArrayList<>();
 
-        String name="apple";
-        String datum="09.02.2017";
+        String name="cheese";
+
+        //pri vnes i ime na den da dodademe kaj datum, pa so like da prochitame posle
+        String datum="07.02.2017";
         String ndbno="01009";
-        int kolichina=2;
+        int kolichina=1;
 
 
         double protein=0,lipid=0,carbo=0,glucose=0,calcium=0;
         double iron=0,mg=0,zinc=0,vitC=0,thiamin=0,ribo=0;
         double niacin=0,vitB6=0,vitB12=0,vitA=0,vitD=0,vitE=0;
 
+       Log.d("msg:","Pred for");
+
 
         for (int i=0;i<lista.size();i++){
+
+            Log.d("Vo for",i+"");
 
             if(lista.get(i).name.equals("Protein")){
 
@@ -176,6 +182,8 @@ public class HistoryActivity extends  MasterActivity  {
 
         }
 
+
+        Log.d("msg:","Posle for");
         NutrientsDBHelper dbHelper=new NutrientsDBHelper(this); //this=context
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values= new ContentValues();
@@ -209,7 +217,11 @@ public class HistoryActivity extends  MasterActivity  {
         values.put(NutrientDBEntry.COLUMN_VITAMIN_D,vitD);
         values.put(NutrientDBEntry.COLUMN_VITAMIN_E,vitE);
 
+        Log.d("msg:","Pred insert");
+
         db.insert(NutrientDBEntry.TABLE_NAME,null,values);
+
+        Log.d("msg:","Posle insert");
 
 
     }

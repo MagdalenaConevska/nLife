@@ -23,6 +23,9 @@ public class HomeActivity extends MasterActivity {
         GridViewAdapter gridViewAdapter=new GridViewAdapter(getApplicationContext());
         gridView.setAdapter(gridViewAdapter);
 
+
         new getDataFromSQLite(getApplicationContext()).execute();
+
+
     }
 }

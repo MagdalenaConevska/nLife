@@ -46,7 +46,11 @@ public class SearchActivity extends MasterActivity {
             // HashSet<String> set = (HashSet)mapa.entrySet();
 
             for(Map.Entry s : mapa.entrySet()){
-                lista.add(s.toString());
+                int pozicijaEdnakvo=s.toString().indexOf('=');
+                int pozicijaUPC=s.toString().indexOf("UPC");
+                String ime=s.toString().substring(pozicijaEdnakvo+1,pozicijaUPC-2);
+               // lista.add(s.toString());
+                lista.add(ime);
             }
             niza = new String[lista.size()];
             for(int i=0; i<lista.size(); i++){
