@@ -60,4 +60,12 @@
 
     </LinearLayout>
 
+    <Button android:id="@+id/save"
+        android:text="save as eaten"
+        android:layout_below="@id/llAnalyzeButtons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="insertInDatabaseTable"
+        />
+
 </RelativeLayout>

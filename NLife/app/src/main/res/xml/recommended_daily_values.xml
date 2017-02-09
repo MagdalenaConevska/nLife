@@ -142,7 +142,7 @@ CategoryID
             <category id="3" value="400" />
         </categories>
     </nutrient>
-    <nutrient name="Vitamin E" id="313" unit="IU">
+    <nutrient name="Vitamin E" id="323" unit="IU">
         <categories>
         <category id="0" value="5" />
         <category id="1" value="10" />
