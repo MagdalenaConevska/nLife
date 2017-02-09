@@ -164,7 +164,7 @@ public class HistoryActivity extends  MasterActivity  {
 
                 vitA=lista.get(i).recorded;
             }
-            else if (lista.get(i).name.equals("Vitamin D (D2 + D3)")){
+            else if (lista.get(i).name.equals("Vitamin D")){
 
                 vitD=lista.get(i).recorded;
             }
