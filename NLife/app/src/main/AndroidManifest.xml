@@ -22,7 +22,12 @@
         <activity android:name=".MasterActivity" />
         <activity android:name=".SearchActivity" />
         <activity android:name=".WeeklyIntakeActivity" />
-        <activity android:name=".SettingsActivity"></activity>
+        <activity android:name=".SettingsActivity" />
+
+        <service
+            android:name=".GetRecipesService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>
