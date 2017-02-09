@@ -14,6 +14,17 @@ public class Nutrient implements Parcelable {
 
     public Nutrient(){}
 
+    @Override
+    public String toString() {
+       StringBuilder sb = new StringBuilder();
+        sb.append(name);
+        sb.append(" : ");
+        sb.append(recorded);
+        sb.append(" ");
+        sb.append(unit);
+        return sb.toString();
+    }
+
     public Nutrient(String name, Double recorded, String unit){
 
         this.name = name;

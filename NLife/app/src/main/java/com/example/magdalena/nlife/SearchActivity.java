@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 
 public class SearchActivity extends MasterActivity {
@@ -48,8 +49,9 @@ public class SearchActivity extends MasterActivity {
 
             // HashSet<String> set = (HashSet)mapa.entrySet();
 
-            for(Map.Entry s : mapa.entrySet()){
-                lista.add(s.toString());
+            Set<String> keys = mapa.keySet();
+            for(String s : keys){
+                lista.add(mapa.get(s));
             }
             niza = new String[lista.size()];
             for(int i=0; i<lista.size(); i++){
@@ -146,8 +148,40 @@ public class SearchActivity extends MasterActivity {
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 //make fragment transaction
+
+                String name = lista.get(position);
+                String id = "ovde nema nisto";
+                Set<String> keys = mapa.keySet();
+                Log.d("Fragment","name: " + name);
+                if(mapa.containsValue(name)){
+                    for(String s : keys){
+                        if(name == mapa.get(s)){
+                            id = s;
+                        }
+                    }
+
+                    Log.d("SearchActivity","id: " + id);
+                    SharedPreferences sp = getApplicationContext().getSharedPreferences("ids", getApplicationContext().MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sp.edit();
+                    editor.putString("id", id);
+                    editor.putString("name", name);
+                    editor.commit();
+
+
+                }
+                Log.d("SearchActivity","before fragment: ");
+
+                ProductDetailFragment fragment = new ProductDetailFragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.activity_search, fragment);
+                fragmentTransaction.commit();
+                Button btn = (Button)findViewById(R.id.btnSearch);
+                btn.setVisibility(View.INVISIBLE);
+                //inside the new fragment construct the design according to the choice
+
                 ConnectivityManager cm=(ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
                 NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
                 boolean isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
@@ -167,6 +201,7 @@ public class SearchActivity extends MasterActivity {
                             "Internet connection is needed in order to get the info. " +
                             "Please connect your device to internet.", Toast.LENGTH_LONG).show();
                 }
+
             }
         });
 
