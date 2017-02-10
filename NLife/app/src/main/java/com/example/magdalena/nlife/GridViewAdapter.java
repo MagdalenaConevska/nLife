@@ -60,7 +60,7 @@ public class GridViewAdapter extends BaseAdapter {
                 imageButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(context,"0 GridItem clicked",Toast.LENGTH_LONG).show();
+                        //Toast.makeText(context,"0 GridItem clicked",Toast.LENGTH_LONG).show();
                         Intent intent=new Intent(context,SearchActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         context.startActivity(intent);
@@ -73,7 +73,7 @@ public class GridViewAdapter extends BaseAdapter {
                 imageButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(context,"1 GridItem clicked",Toast.LENGTH_LONG).show();
+                        //Toast.makeText(context,"1 GridItem clicked",Toast.LENGTH_LONG).show();
                         Intent intent=new Intent(context,DailyIntakeActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         context.startActivity(intent);
@@ -86,7 +86,7 @@ public class GridViewAdapter extends BaseAdapter {
                 imageButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(context,"2 GridItem clicked",Toast.LENGTH_LONG).show();
+                        //Toast.makeText(context,"2 GridItem clicked",Toast.LENGTH_LONG).show();
                         //show dialog instead of next code
                         int age=Integer.parseInt(PreferenceManager.getDefaultSharedPreferences(context).getString(context.getResources().getString(R.string.pref_age_key),context.getResources().getString(R.string.pref_age_defaultValue)));
                         String gender=PreferenceManager.getDefaultSharedPreferences(context).getString(context.getResources().getString(R.string.pref_gender_key),context.getResources().getString(R.string.pref_gender_defaultValue));
@@ -119,7 +119,7 @@ public class GridViewAdapter extends BaseAdapter {
                 imageButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(context,"3 GridItem clicked",Toast.LENGTH_LONG).show();
+                        //Toast.makeText(context,"3 GridItem clicked",Toast.LENGTH_LONG).show();
                         Intent intent=new Intent(context,HistoryActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         context.startActivity(intent);
