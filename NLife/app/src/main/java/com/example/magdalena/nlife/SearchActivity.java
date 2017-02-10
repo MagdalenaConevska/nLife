@@ -38,6 +38,8 @@ public class SearchActivity extends MasterActivity {
     ArrayAdapter<String> ad;
     EditText et;
 
+    String category;
+
     BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -112,6 +114,26 @@ public class SearchActivity extends MasterActivity {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.categories_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                // tv.setText("Spinner selected : ");
+                //tv.setText(tv.getText() + parent.getItemAtPosition(position).toString());
+              //  category=parent.getSelectedItem().toString();
+                category=parent.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                //Another interface callback
+            }
+        });
+
+
+
+
+
         lv = (ListView)findViewById(R.id.lvSearch);
         Button button = (Button) findViewById(R.id.btnSearch);
         button.setOnClickListener(new View.OnClickListener() {
@@ -128,6 +150,7 @@ public class SearchActivity extends MasterActivity {
                     SharedPreferences sp = getApplicationContext().getSharedPreferences("searches", getApplicationContext().MODE_PRIVATE);
                     SharedPreferences.Editor editor = sp.edit();
                     editor.putString("search", searchItem);
+                    editor.putString("category",category);
                     editor.commit();
 
                     Intent intent = new Intent(getApplicationContext(), GetRecipesService.class);

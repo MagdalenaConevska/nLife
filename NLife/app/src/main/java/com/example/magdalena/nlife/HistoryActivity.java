@@ -46,7 +46,7 @@ public class HistoryActivity extends  MasterActivity  {
         setContentView(R.layout.activity_history);
 
 
-        final Spinner spinner = (Spinner) findViewById(R.id.spinnerDays);
+         Spinner spinner = (Spinner) findViewById(R.id.spinnerDays);
 // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.days_array, android.R.layout.simple_spinner_item);
@@ -60,7 +60,7 @@ public class HistoryActivity extends  MasterActivity  {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                // tv.setText("Spinner selected : ");
                 //tv.setText(tv.getText() + parent.getItemAtPosition(position).toString());
-                den=spinner.getSelectedItem().toString();
+                den=parent.getItemAtPosition(position).toString();
             }
 
             @Override

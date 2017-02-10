@@ -12,6 +12,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Created by Toni on 01.02.2017.
  */
@@ -75,7 +78,13 @@ public class GridViewAdapter extends BaseAdapter {
                     public void onClick(View v) {
                         //Toast.makeText(context,"1 GridItem clicked",Toast.LENGTH_LONG).show();
                         Intent intent=new Intent(context,DailyIntakeActivity.class);
+
+                        SimpleDateFormat sdf = new SimpleDateFormat("EEEE");
+                        Date now = new Date();
+                        String currentDayOfTheWeek = sdf.format(now);
+
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        intent.putExtra("Den",currentDayOfTheWeek);
                         context.startActivity(intent);
                     }
                 });

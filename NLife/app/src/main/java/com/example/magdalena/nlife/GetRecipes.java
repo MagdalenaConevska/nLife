@@ -41,6 +41,8 @@ public class GetRecipes extends AsyncTask<Void,Void,Void> {
     String apiUrl="https://api.nal.usda.gov/ndb/search/?format=json&q=";
     String apiKey="UMfhmQAzbJrzs6Ae872mqxrHB6SrHk54r18SMKMC";
 
+    String selectedCategory;
+
     String searchItem;
     static JSONObject jsonObject;
 
@@ -54,6 +56,8 @@ public class GetRecipes extends AsyncTask<Void,Void,Void> {
     protected void onPreExecute() {
         super.onPreExecute();
         SharedPreferences sp = context.getSharedPreferences("searches", context.MODE_PRIVATE);
+        selectedCategory=sp.getString("category",null);
+        Log.d("kategodija",selectedCategory);
         searchItem = sp.getString("search", null);
         Log.d("GetRecipes","got product: " + searchItem);
     }
@@ -101,12 +105,12 @@ public class GetRecipes extends AsyncTask<Void,Void,Void> {
             for(int i=0; i<item.length(); i++){
 
                 JSONObject one = item.getJSONObject(i);
-             //   String itemCategory=one.getString("fg");
-               // if(itemCategory.equals(selectedCategory)) {
+                String itemCategory=one.getString("group");
+                if(itemCategory.equals(selectedCategory)) {
                     String name = one.getString("name");
                     String ndbno = one.getString("ndbno");
                     mapa.put(ndbno, name);
-             //   }
+                }
             }
             Log.d("GetRecipes","number of items: " + item.length() + " number of items in map: " + mapa.size());
             // Toast.makeText(context, "number of items: " + item.length(), Toast.LENGTH_LONG).show();

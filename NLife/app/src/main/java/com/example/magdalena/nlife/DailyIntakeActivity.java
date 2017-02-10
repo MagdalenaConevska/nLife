@@ -21,7 +21,7 @@ public class DailyIntakeActivity extends  MasterActivity  {
         setContentView(R.layout.activity_daily_intake);
 
         GraphView graph = (GraphView) findViewById(R.id.graph);
-        String den=getIntent().getStringExtra("den");
+        String den=getIntent().getStringExtra("Den");
 
         new getDataFromSQLite(this,den).execute();
 

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -47,7 +48,9 @@ public class getDataFromSQLite extends AsyncTask<Void,Void,Void> {
         String[] selectionArgs = new String[1];
 
         //ova treba da go prezememe od spinnerot- i da dodavame ime na den
-        selectionArgs[0] = daySelectionFilter;
+       // selectionArgs[0] = daySelectionFilter;
+
+        selectionArgs[0] = "09.02.2018";
 
         Cursor cursor = db.query(NutrientDBEntry.TABLE_NAME, projection, selection, selectionArgs, null, null, null);
 
