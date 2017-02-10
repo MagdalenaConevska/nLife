@@ -101,9 +101,12 @@ public class GetRecipes extends AsyncTask<Void,Void,Void> {
             for(int i=0; i<item.length(); i++){
 
                 JSONObject one = item.getJSONObject(i);
-                String name = one.getString("name");
-                String ndbno = one.getString("ndbno");
-                mapa.put(ndbno, name);
+             //   String itemCategory=one.getString("fg");
+               // if(itemCategory.equals(selectedCategory)) {
+                    String name = one.getString("name");
+                    String ndbno = one.getString("ndbno");
+                    mapa.put(ndbno, name);
+             //   }
             }
             Log.d("GetRecipes","number of items: " + item.length() + " number of items in map: " + mapa.size());
             // Toast.makeText(context, "number of items: " + item.length(), Toast.LENGTH_LONG).show();

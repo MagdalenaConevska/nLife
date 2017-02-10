@@ -3,6 +3,7 @@
     package="com.example.magdalena.nlife">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -27,7 +28,9 @@
         <service
             android:name=".GetRecipesService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
+
+        <activity android:name=".DetailsActivity"></activity>
     </application>
 
 </manifest>

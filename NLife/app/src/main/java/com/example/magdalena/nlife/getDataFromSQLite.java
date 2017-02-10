@@ -15,10 +15,13 @@ import java.util.ArrayList;
 public class getDataFromSQLite extends AsyncTask<Void,Void,Void> {
 
     Context context;
+    String daySelectionFilter;
 
-    public getDataFromSQLite(Context c) {
+    public getDataFromSQLite(Context c,String d) {
         context = c;
+        this.daySelectionFilter=d;
     }
+
 
 
     @Override
@@ -44,7 +47,7 @@ public class getDataFromSQLite extends AsyncTask<Void,Void,Void> {
         String[] selectionArgs = new String[1];
 
         //ova treba da go prezememe od spinnerot- i da dodavame ime na den
-        selectionArgs[0] = "09.02.2017";
+        selectionArgs[0] = daySelectionFilter;
 
         Cursor cursor = db.query(NutrientDBEntry.TABLE_NAME, projection, selection, selectionArgs, null, null, null);
 

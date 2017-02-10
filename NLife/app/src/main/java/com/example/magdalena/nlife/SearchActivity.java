@@ -7,6 +7,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -23,6 +25,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 
 public class SearchActivity extends MasterActivity {
@@ -32,6 +35,7 @@ public class SearchActivity extends MasterActivity {
     ArrayList<String> lista;
     ListView lv;
     String[] niza;
+    ArrayAdapter<String> ad;
     EditText et;
 
     BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
@@ -45,17 +49,16 @@ public class SearchActivity extends MasterActivity {
 
             // HashSet<String> set = (HashSet)mapa.entrySet();
 
-            for(Map.Entry s : mapa.entrySet()){
-                int pozicijaEdnakvo=s.toString().indexOf('=');
-                int pozicijaUPC=s.toString().indexOf("UPC");
-                String ime=s.toString().substring(pozicijaEdnakvo+1,pozicijaUPC-2);
-               // lista.add(s.toString());
-                lista.add(ime);
+
+            Set<String> keys = mapa.keySet();
+            for(String s : keys){
+                lista.add(mapa.get(s));
             }
             niza = new String[lista.size()];
             for(int i=0; i<lista.size(); i++){
                 niza[i] = lista.get(i);
             }
+
 
             showInList();
 
@@ -65,15 +68,14 @@ public class SearchActivity extends MasterActivity {
     };
 
     public void showInList(){
-        if(niza.length!= 0){
-
-        } else {
-            Toast.makeText(this, "There is no such item in this category.", Toast.LENGTH_LONG);
-
+        if(niza.length == 0) {
+            Toast.makeText(this, "There is no such item in this category.", Toast.LENGTH_LONG).show();
         }
-        ArrayAdapter<String> ad = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, niza);
-        // ad.clear();
+
+        ad = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, niza);
+        //ad.clear();
         lv.setAdapter(ad);
+        //lv.invalidate();
         Log.d("SearchActivity","end");
 
     }
@@ -115,20 +117,31 @@ public class SearchActivity extends MasterActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                searchItem = et.getText().toString().trim();
-                Log.d("SearchActivity","Service starting");
-                //startService(new Intent(getApplicationContext(), GetRecipesService.class).putExtra("search", searchItem));
-                Log.d("GetRecipes","got product: " + searchItem);
-                SharedPreferences sp = getApplicationContext().getSharedPreferences("searches", getApplicationContext().MODE_PRIVATE);
-                SharedPreferences.Editor editor = sp.edit();
-                editor.putString("search", searchItem);
-                editor.commit();
+                ConnectivityManager cm=(ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+                boolean isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
+                if(isConnected){
+                    searchItem = et.getText().toString().trim();
+                    Log.d("SearchActivity","Service starting");
+                    //startService(new Intent(getApplicationContext(), GetRecipesService.class).putExtra("search", searchItem));
+                    Log.d("GetRecipes","got product: " + searchItem);
+                    SharedPreferences sp = getApplicationContext().getSharedPreferences("searches", getApplicationContext().MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sp.edit();
+                    editor.putString("search", searchItem);
+                    editor.commit();
 
-                Intent intent = new Intent(getApplicationContext(), GetRecipesService.class);
-                //intent.putExtra("search", searchItem);
+                    Intent intent = new Intent(getApplicationContext(), GetRecipesService.class);
+                    //intent.putExtra("search", searchItem);
 
-                getApplicationContext().startService(intent);
-                Log.d("SearchActivity","Service should have started");
+                    getApplicationContext().startService(intent);
+                    Log.d("SearchActivity","Service should have started");
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "Device is not connected to internet. " +
+                            "Internet connection is needed in order to get the info. " +
+                            "Please connect your device to internet.", Toast.LENGTH_LONG).show();
+                }
+
 
             }
         });
@@ -137,18 +150,49 @@ public class SearchActivity extends MasterActivity {
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 //make fragment transaction
 
+                String name = lista.get(position);
+                String id = "ovde nema nisto";
+                Set<String> keys = mapa.keySet();
+                Log.d("Fragment","name: " + name);
+                if(mapa.containsValue(name)){
+                    for(String s : keys){
+                        if(name == mapa.get(s)){
+                            id = s;
+                        }
+                    }
 
-                ProductDetailFragment fragment = new ProductDetailFragment();
-                FragmentManager fragmentManager = getFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.activity_search, fragment);
-                fragmentTransaction.commit();
-                Button btn = (Button)findViewById(R.id.btnSearch);
-                btn.setVisibility(View.INVISIBLE);
-                //inside the new fragment construct the design according to the choice
+                    Log.d("SearchActivity","id: " + id);
+                    SharedPreferences sp = getApplicationContext().getSharedPreferences("ids", getApplicationContext().MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sp.edit();
+                    editor.putString("id", id);
+                    editor.putString("name", name);
+                    editor.commit();
+
+
+                }
+                Log.d("SearchActivity","before fragment: ");
+
+
+
+                ConnectivityManager cm=(ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+                boolean isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
+                if(isConnected) {
+
+
+                    Intent intent = new Intent(getApplication(), DetailsActivity.class);
+                    startActivity(intent);
+
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "Device is not connected to internet. " +
+                            "Internet connection is needed in order to get the info. " +
+                            "Please connect your device to internet.", Toast.LENGTH_LONG).show();
+                }
+
             }
         });
 

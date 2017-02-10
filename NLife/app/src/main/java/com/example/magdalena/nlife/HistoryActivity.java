@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
@@ -19,6 +20,7 @@ import java.util.Date;
 public class HistoryActivity extends  MasterActivity  {
 
     ArrayList<Nutrient>lista;
+    String den="Monday";
 
 
     BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
@@ -37,7 +39,7 @@ public class HistoryActivity extends  MasterActivity  {
         setContentView(R.layout.activity_history);
 
 
-        Spinner spinner = (Spinner) findViewById(R.id.spinnerDays);
+        final Spinner spinner = (Spinner) findViewById(R.id.spinnerDays);
 // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.days_array, android.R.layout.simple_spinner_item);
@@ -45,6 +47,25 @@ public class HistoryActivity extends  MasterActivity  {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+               // tv.setText("Spinner selected : ");
+                //tv.setText(tv.getText() + parent.getItemAtPosition(position).toString());
+                den=spinner.getSelectedItem().toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                //Another interface callback
+            }
+        });
+
+
+
+
+
 
         new GetReport(getApplicationContext()).execute();
 
@@ -73,6 +94,7 @@ public class HistoryActivity extends  MasterActivity  {
     public void startDailyIntakeActivity(View v){
 
         Intent intent = new Intent(this, DailyIntakeActivity.class);
+        intent.putExtra("Den",den);
         startActivity(intent);
 
     }
@@ -84,6 +106,7 @@ public class HistoryActivity extends  MasterActivity  {
 
     }
 
+    /*
     public void insertInDatabaseTable(View v){
         //ovde kodot za insert
 
@@ -226,6 +249,6 @@ public class HistoryActivity extends  MasterActivity  {
 
     }
 
-
+*/
 
 }

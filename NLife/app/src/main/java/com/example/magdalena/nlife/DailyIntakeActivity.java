@@ -21,8 +21,9 @@ public class DailyIntakeActivity extends  MasterActivity  {
         setContentView(R.layout.activity_daily_intake);
 
         GraphView graph = (GraphView) findViewById(R.id.graph);
+        String den=getIntent().getStringExtra("den");
 
-        //koga se kreira ova aktiviti ni treba obrabotka od baza
+        new getDataFromSQLite(this,den).execute();
 
 
 
