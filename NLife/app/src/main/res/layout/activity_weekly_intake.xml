@@ -10,9 +10,54 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.magdalena.nlife.WeeklyIntakeActivity">
 
+    <Spinner
+        android:id="@+id/spinnerNutrients6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:spinnerMode="dialog" />
+
+    <Spinner
+        android:id="@+id/spinnerNutrients7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_below="@id/spinnerNutrients6"
+        android:spinnerMode="dialog" />
+
+    <Spinner
+        android:id="@+id/spinnerNutrients8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_below="@id/spinnerNutrients7"
+        android:spinnerMode="dialog" />
+
+    <Spinner
+        android:id="@+id/spinnerNutrients9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_below="@id/spinnerNutrients8"
+        android:spinnerMode="dialog" />
+
+    <Button
+        android:text="Show"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/spinnerNutrients9"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:background="@color/color1"
+        android:layout_marginBottom="15dp"
+        android:id="@+id/buttonNutrientsWeekly" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/buttonNutrientsWeekly"
         android:id="@+id/llTitle2"
         >
 
