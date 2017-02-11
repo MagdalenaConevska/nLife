@@ -66,11 +66,11 @@ public class getDataFromSQLite extends AsyncTask<Void,Void,Void> {
                         cursor.getDouble(12), cursor.getDouble(13), cursor.getDouble(14), cursor.getDouble(15), cursor.getDouble(16),
                         cursor.getDouble(17), cursor.getDouble(18), cursor.getDouble(19), cursor.getDouble(20));
                 torki.add(torka);
-              //  Log.d("od baza",torka.getName()+" "+torka.getDate());
+                //  Log.d("od baza",torka.getName()+" "+torka.getDate());
                 cursor.moveToNext();
             }
         }
-       // else Log.d("nema ","Monday");
+        // else Log.d("nema ","Monday");
 
         Intent intent = new Intent();
         intent.setAction("GetDailyValues");
@@ -83,3 +83,4 @@ public class getDataFromSQLite extends AsyncTask<Void,Void,Void> {
     }
 
 }
+

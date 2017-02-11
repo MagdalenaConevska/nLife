@@ -105,6 +105,11 @@ public class DetailsActivity extends AppCompatActivity {
         new GetReport(this).execute();
         Log.d("Fragment","executed");
 
+        SharedPreferences sp = getSharedPreferences("ids", this.MODE_PRIVATE);
+        name = sp.getString("name", null);
+        id=sp.getString("id",null);
+
+
         Button btn = (Button)findViewById(R.id.btnNutrients);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,6 +120,8 @@ public class DetailsActivity extends AppCompatActivity {
                 String ndbno = "01009";
                 int kolichina = 2;
                 */
+
+
 
                 SimpleDateFormat sdf = new SimpleDateFormat("EEEE");
                 Date now = new Date();

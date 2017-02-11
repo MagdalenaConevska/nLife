@@ -70,5 +70,7 @@ public class GetRecommendedValues extends AsyncTask<Integer,Void,HashMap<String,
         intent.setAction("GetRecommendedValues");
         intent.putExtra("Nutrients1",stringDoubleHashMap);
         context.sendBroadcast(intent);
+
+
     }
 }

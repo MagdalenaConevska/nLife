@@ -4,10 +4,14 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Spinner;
 
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.LegendRenderer;
@@ -15,9 +19,13 @@ import com.jjoe64.graphview.ValueDependentColor;
 import com.jjoe64.graphview.helper.StaticLabelsFormatter;
 import com.jjoe64.graphview.series.BarGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.DataPointInterface;
+import com.jjoe64.graphview.series.LineGraphSeries;
+import com.jjoe64.graphview.series.PointsGraphSeries;
 
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.TreeSet;
 
 
 public class DailyIntakeActivity extends  MasterActivity  {
@@ -94,8 +102,36 @@ public class DailyIntakeActivity extends  MasterActivity  {
     }
 
     private void showGraph(){
-        GraphView graph = (GraphView) findViewById(R.id.graph);
+       GraphView graph = (GraphView) findViewById(R.id.graph);
 
+       /*GraphView graph = (GraphView) findViewById(R.id.graph);
+        BarGraphSeries<DataPoint> series = new BarGraphSeries<>(new DataPoint[] {
+                new DataPoint(0, -2),
+                new DataPoint(1, 5),
+                new DataPoint(2, 3),
+                new DataPoint(3, 2),
+                new DataPoint(4, 6)
+        });
+        graph.addSeries(series);
+
+        PointsGraphSeries<DataPoint> series4 = new PointsGraphSeries<>(new DataPoint[] {
+                new DataPoint(0, 1),
+                new DataPoint(1, 2),
+                new DataPoint(2, 0),
+                new DataPoint(3, -1),
+                new DataPoint(4, 3)
+        });
+        graph.addSeries(series4);
+        series4.setColor(Color.RED);
+        series4.setCustomShape(new PointsGraphSeries.CustomShape() {
+            @Override
+            public void draw(Canvas canvas, Paint paint, float x, float y, DataPointInterface dataPoint) {
+                paint.setStrokeWidth(7);
+                canvas.drawLine(x-10, y, x+10, y, paint);
+               // canvas.drawLine(x+20, y-20, x-20, y+20, paint);
+            }
+        });
+*/
 
 
         BarGraphSeries<DataPoint> series = new BarGraphSeries<>(new DataPoint[] {
@@ -148,4 +184,7 @@ public class DailyIntakeActivity extends  MasterActivity  {
         graph.getLegendRenderer().setVisible(true);
         graph.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.TOP);
     }
+
+
+
 }
