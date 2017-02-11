@@ -11,11 +11,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class DetailsActivity extends AppCompatActivity {
 
@@ -24,6 +27,8 @@ public class DetailsActivity extends AppCompatActivity {
     //ListView lv;
     String[] niza;
     ArrayAdapter<String> ad;
+
+    String id;
 
 
 
@@ -44,6 +49,8 @@ public class DetailsActivity extends AppCompatActivity {
 
         SharedPreferences sp = getSharedPreferences("ids", this.MODE_PRIVATE);
         name = sp.getString("name", null);
+        id=sp.getString("id",null);
+
         //Log.d("IMEEEEEEEEEEEEEEEE",name);
         Log.d("Fragment","got preference");
         TextView tv = (TextView)findViewById(R.id.productName);
@@ -102,13 +109,26 @@ public class DetailsActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String name = "apple";
+
+                /*String name = "apple";
                 String datum = "09.02.2017";
                 String ndbno = "01009";
                 int kolichina = 2;
+                */
+
+                SimpleDateFormat sdf = new SimpleDateFormat("EEEE");
+                Date now = new Date();
+                String currentDayOfTheWeek = sdf.format(now);
 
 
-                double protein = 0, lipid = 0, carbo = 0, glucose = 0, calcium = 0;
+                String amount=((EditText)findViewById(R.id.numberPicker)).getText().toString();
+                int kolichina=Integer.parseInt(amount);
+
+                //da se proveri dali raboti zapisot vo baza!!!
+                new InsertIntoDataBase(getApplicationContext(),name,currentDayOfTheWeek,id,kolichina,lista).execute();
+
+
+               /* double protein = 0, lipid = 0, carbo = 0, glucose = 0, calcium = 0;
                 double iron = 0, mg = 0, zinc = 0, vitC = 0, thiamin = 0, ribo = 0;
                 double niacin = 0, vitB6 = 0, vitB12 = 0, vitA = 0, vitD = 0, vitE = 0;
 
@@ -168,10 +188,12 @@ public class DetailsActivity extends AppCompatActivity {
                     }
 
                 }
-
+ */
+                /*
                 Intent intent = new Intent(getApplication(), HomeActivity.class);
                 Toast.makeText(getApplicationContext(), "This item has been added to your history", Toast.LENGTH_LONG);
                 startActivity(intent);
+                */
 
             }
         });
