@@ -8,6 +8,11 @@ import android.graphics.Color;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.Spinner;
 
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.LegendRenderer;
@@ -18,6 +23,8 @@ import com.jjoe64.graphview.series.DataPoint;
 
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 
 public class DailyIntakeActivity extends  MasterActivity  {
@@ -25,6 +32,12 @@ public class DailyIntakeActivity extends  MasterActivity  {
     Map<String,Double> map;
     ArrayList<Tuple> tuples;
     String day;
+    Spinner spinner1;
+    Spinner spinner2;
+    Spinner spinner3;
+    Spinner spinner4;
+    Spinner spinner5;
+    Set<String> values;
 
     BroadcastReceiver broadcastReceiver1=new BroadcastReceiver() {
         @Override
@@ -49,28 +62,35 @@ public class DailyIntakeActivity extends  MasterActivity  {
         day=getIntent().getStringExtra("Den");
         //day="Monday";
         //showGraph();
-        int age=Integer.parseInt(PreferenceManager.getDefaultSharedPreferences(this).getString(getResources().getString(R.string.pref_age_key),getResources().getString(R.string.pref_age_defaultValue)));
-        String gender=PreferenceManager.getDefaultSharedPreferences(this).getString(getResources().getString(R.string.pref_gender_key),getResources().getString(R.string.pref_gender_defaultValue));
-        int category=0;
-        if(age==0 || age==1) {
-            category = 0;
-        }
-        else if(age<4) {
-            category = 1;
-        }
-        else {
-            if (gender.equals(getResources().getString(R.string.male))) {
-                category = 3;
-            } else {
-                boolean pregnancy = PreferenceManager.getDefaultSharedPreferences(this).getBoolean(getResources().getString(R.string.pref_pr_key), false);
-                if (pregnancy) {
-                    category = 2;
-                } else {
-                    category = 3;
+        spinner1=(Spinner)this.findViewById(R.id.spinnerNutrients1);
+        spinner2=(Spinner)this.findViewById(R.id.spinnerNutrients2);
+        spinner3=(Spinner)this.findViewById(R.id.spinnerNutrients3);
+        spinner4=(Spinner)this.findViewById(R.id.spinnerNutrients4);
+        spinner5=(Spinner)this.findViewById(R.id.spinnerNutrients5);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.nutrients_list, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner1.setAdapter(adapter);
+        spinner2.setAdapter(adapter);
+        spinner3.setAdapter(adapter);
+        spinner4.setAdapter(adapter);
+        spinner5.setAdapter(adapter);
+        values=new TreeSet<String>();
+
+        Button buttonShow=(Button)this.findViewById(R.id.buttonNutrients);
+        buttonShow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(map==null || tuples==null) {
+                    getValues();
+                    Log.d("DailyIntakeActivity","getValues()");
+                }
+                else {
+                    showGraph();
+                    Log.d("DailyIntakeActivity","showGraph()");
                 }
             }
-        }
-        new GetRecommendedValues(getApplicationContext()).execute(category);
+        });
 
         // new getDataFromSQLite(getApplicationContext()).execute();
     }
@@ -93,11 +113,44 @@ public class DailyIntakeActivity extends  MasterActivity  {
         registerReceiver(broadcastReceiver2, filter2);
     }
 
+    private void getValues(){
+        if(!values.isEmpty()){
+            values.clear();
+        }
+        values.add(spinner1.getSelectedItem().toString());
+        values.add(spinner2.getSelectedItem().toString());
+        values.add(spinner3.getSelectedItem().toString());
+        values.add(spinner4.getSelectedItem().toString());
+        values.add(spinner5.getSelectedItem().toString());
+
+        int age=Integer.parseInt(PreferenceManager.getDefaultSharedPreferences(this).getString(getResources().getString(R.string.pref_age_key),getResources().getString(R.string.pref_age_defaultValue)));
+        String gender=PreferenceManager.getDefaultSharedPreferences(this).getString(getResources().getString(R.string.pref_gender_key),getResources().getString(R.string.pref_gender_defaultValue));
+        int category=0;
+        if(age==0 || age==1) {
+            category = 0;
+        }
+        else if(age<4) {
+            category = 1;
+        }
+        else {
+            if (gender.equals(getResources().getString(R.string.male))) {
+                category = 3;
+            } else {
+                boolean pregnancy = PreferenceManager.getDefaultSharedPreferences(this).getBoolean(getResources().getString(R.string.pref_pr_key), false);
+                if (pregnancy) {
+                    category = 2;
+                } else {
+                    category = 3;
+                }
+            }
+        }
+        new GetRecommendedValues(getApplicationContext()).execute(category);
+    }
+
     private void showGraph(){
+        //tuka da se prikazat vrednostite za 5te izbrani nutrienti
+
         GraphView graph = (GraphView) findViewById(R.id.graph);
-
-
-
         BarGraphSeries<DataPoint> series = new BarGraphSeries<>(new DataPoint[] {
                 new DataPoint(0, -1),
                 new DataPoint(0.2, 5),
