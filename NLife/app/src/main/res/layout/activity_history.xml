@@ -16,16 +16,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:spinnerMode="dialog"
-        />
+        android:spinnerMode="dialog" />
 
    <ListView
-
        android:id="@+id/lvEaten"
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
-       android:layout_below="@id/spinnerDays"
-       >
+       android:layout_below="@id/spinnerDays" >
 
    </ListView>
 
@@ -33,32 +30,28 @@
         android:id="@+id/llAnalyzeButtons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/lvEaten"
-        >
+        android:layout_below="@id/lvEaten" >
 
+    <!--Bojata dodava padding ili margin :/-->
     <Button
         android:id="@+id/btnDaily"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="@string/btnDaily"
+        android:textAllCaps="false"
         android:background="@color/color2"
-        android:onClick="startDailyIntakeActivity"
-
-        />
+        android:onClick="startDailyIntakeActivity" />
 
     <Button
         android:id="@+id/btnWeekly"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="@string/btnWeekly"
-        android:visibility="visible"
-        android:onClick="startWeeklyIntakeActivity"
-
-        />
+        android:textAllCaps="false"
+        android:onClick="startWeeklyIntakeActivity" />
 
     </LinearLayout>
-
 
 </RelativeLayout>
