@@ -1,6 +1,7 @@
 package com.example.magdalena.nlife;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
@@ -68,6 +69,12 @@ public class getDataFromSQLite extends AsyncTask<Void,Void,Void> {
                 cursor.moveToNext();
             }
         }
+
+        Intent intent = new Intent();
+        intent.setAction("GetDailyValues");
+        intent.putExtra("Nutrients2",torki);
+        context.sendBroadcast(intent);
+
 
         return null;
 
