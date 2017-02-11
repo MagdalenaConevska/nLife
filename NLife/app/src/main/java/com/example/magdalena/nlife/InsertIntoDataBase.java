@@ -26,6 +26,7 @@ public class InsertIntoDataBase extends AsyncTask<Void,Void,Void> {
         this.id=id;
         kolichina=kol;
         lista=l;
+        ime=i;
 
     }
 
