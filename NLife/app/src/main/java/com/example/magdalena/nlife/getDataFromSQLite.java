@@ -1,6 +1,7 @@
 package com.example.magdalena.nlife;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
@@ -48,9 +49,9 @@ public class getDataFromSQLite extends AsyncTask<Void,Void,Void> {
         String[] selectionArgs = new String[1];
 
         //ova treba da go prezememe od spinnerot- i da dodavame ime na den
-       // selectionArgs[0] = daySelectionFilter;
+        selectionArgs[0] = daySelectionFilter;
 
-        selectionArgs[0] = "09.02.2018";
+        //selectionArgs[0] = "09.02.2018";
 
         Cursor cursor = db.query(NutrientDBEntry.TABLE_NAME, projection, selection, selectionArgs, null, null, null);
 
@@ -68,6 +69,12 @@ public class getDataFromSQLite extends AsyncTask<Void,Void,Void> {
                 cursor.moveToNext();
             }
         }
+
+        Intent intent = new Intent();
+        intent.setAction("GetDailyValues");
+        intent.putExtra("Nutrients2",torki);
+        context.sendBroadcast(intent);
+
 
         return null;
 

@@ -1,6 +1,7 @@
 package com.example.magdalena.nlife;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -65,5 +66,9 @@ public class GetRecommendedValues extends AsyncTask<Integer,Void,HashMap<String,
         for (Map.Entry<String, Double> entry : set) {
             Log.d("GetRecommendedValues",entry.getKey()+"->"+entry.getValue());
         }
+        Intent intent = new Intent();
+        intent.setAction("GetRecommendedValues");
+        intent.putExtra("Nutrients1",stringDoubleHashMap);
+        context.sendBroadcast(intent);
     }
 }

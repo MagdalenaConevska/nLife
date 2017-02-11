@@ -23,15 +23,13 @@ import java.util.Date;
 public class HistoryActivity extends  MasterActivity  {
 
     ArrayList<Nutrient>lista;
-    String den="Monday";
+    String den;
 
 
     BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             lista=(ArrayList<Nutrient>)intent.getExtras().get("Nutrients");
-
-
             Log.d("HistoryActivity","Broadcast received");
             Toast.makeText(getApplicationContext(),"Broadcast received",Toast.LENGTH_LONG).show();
 
@@ -69,12 +67,19 @@ public class HistoryActivity extends  MasterActivity  {
             }
         });
 
+        /*spinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                den=parent.getItemAtPosition(position).toString();
+            }
+        });*/
 
 
 
 
 
-        new GetReport(getApplicationContext()).execute();
+
+       // new GetReport(getApplicationContext()).execute();
 
 
     }
