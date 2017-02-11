@@ -31,6 +31,7 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 import com.jjoe64.graphview.series.PointsGraphSeries;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Map;
 
 import java.util.Set;
@@ -62,6 +63,11 @@ public class DailyIntakeActivity extends  MasterActivity  {
         @Override
         public void onReceive(Context context, Intent intent) {
             tuples=(ArrayList<Tuple>)intent.getExtras().get("Nutrients2");
+            Log.d("Tuples"," received");
+            Log.d("Tuples size ",tuples.size()+"");
+            Log.d("Tuple1",tuples.get(0).getName());
+
+
             showGraph();
         }
     };
@@ -195,7 +201,119 @@ public class DailyIntakeActivity extends  MasterActivity  {
     private void showGraph(){
         //tuka da se prikazat vrednostite za 5te izbrani nutrienti
 
+        //vo setot values se potrebnite nutrienti(5te)
+
+        //vo tuples se site vrateni torki od bazata
+
+        Log.d("ShowGraph " ,"started");
+
+        Log.d("Tuples length ",tuples.size()+"");
+
+        ArrayList<Double> vkupno = new ArrayList<Double>();
+
+        //vo vkupno, sekoj element, e vkupnata vrednost za nutrientot pod toj broj
+
+        int brNutrienti=values.size();
+
+        for(int i=0;i<brNutrienti;i++){
+
+            vkupno.set(i,0.0);
+
+        }
+
+         Iterator<String> it = values.iterator();
+
+            String currentNutrient = null;
+            double dodadi=0;
+           /* while(it.hasNext() ) {
+                currentNutrient = it.next();
+
+            } */
+
+            for(int j=0;j<brNutrienti;j++){
+
+                currentNutrient=it.next();
+
+                for(int i=0;i<tuples.size();i++){
+
+                    Tuple currentTuple=tuples.get(i);
+
+                    if(currentNutrient.equals("Protein")){
+                        dodadi=(currentTuple.getProtein())*currentTuple.getQuantity()/100;
+                    }
+                    else if(currentNutrient.equals("Total lipid (fat)")){
+                        dodadi=(currentTuple.getLipid())*currentTuple.getQuantity()/100;
+                    }
+                    else if(currentNutrient.equals("Carbohydrate")){
+                        dodadi=(currentTuple.getCarbohydrate())*currentTuple.getQuantity()/100;
+                    }
+                    else if(currentNutrient.equals("Glucose")){
+                        dodadi=(currentTuple.getGlucose())*currentTuple.getQuantity()/100;
+                    }
+                    else if(currentNutrient.equals("Calcium")){
+                        dodadi=(currentTuple.getCalcium())*currentTuple.getQuantity()/100;
+                    }
+                    else if(currentNutrient.equals("Iron")){
+                        dodadi=(currentTuple.getIron())*currentTuple.getQuantity()/100;
+                    }
+                    else if(currentNutrient.equals("Magnesium")){
+                        dodadi=(currentTuple.getMagnesium())*currentTuple.getQuantity()/100;
+                    }
+                    else if(currentNutrient.equals("Zinc")){
+                        dodadi=(currentTuple.getZinc())*currentTuple.getQuantity()/100;
+                    }
+                    else if(currentNutrient.equals("Vitamin C")){
+                        dodadi=(currentTuple.getVitaminC())*currentTuple.getQuantity()/100;
+                    }
+                    else if(currentNutrient.equals("Thiamin")){
+                        dodadi=(currentTuple.getThiamin())*currentTuple.getQuantity()/100;
+                    }
+                    else if(currentNutrient.equals("Riboflavin")){
+                        dodadi=(currentTuple.getRibofavin())*currentTuple.getQuantity()/100;
+                    }
+                    else if(currentNutrient.equals("Niacin")){
+                        dodadi=(currentTuple.getNiacin())*currentTuple.getQuantity()/100;
+                    }
+                    else if(currentNutrient.equals("Vitamin B6")){
+                        dodadi=(currentTuple.getVitaminB6())*currentTuple.getQuantity()/100;
+                    }
+                    else if(currentNutrient.equals("Vitamin B12")){
+                        dodadi=(currentTuple.getVitaminB12())*currentTuple.getQuantity()/100;
+                    }
+                    else if(currentNutrient.equals("VitaminA")){
+                        dodadi=(currentTuple.getVitaminA())*currentTuple.getQuantity()/100;
+                    }
+                    else if(currentNutrient.equals("Vitamin D")){
+                        dodadi=(currentTuple.getVitaminD())*currentTuple.getQuantity()/100;
+                    }
+                    else if(currentNutrient.equals("Vitamin E")){
+                        dodadi=(currentTuple.getVitaminE())*currentTuple.getQuantity()/100;
+                    }
+
+                    dodadi=dodadi+vkupno.get(j);
+                    vkupno.set(j,dodadi);
+
+                }
+
+            }
+
+        //posle ova vo vkupno se sodrzhat y vrednostite za grafikot
+
+
         GraphView graph = (GraphView) findViewById(R.id.graph);
+
+        DataPoint[] dpArray = new DataPoint[vkupno.size()];
+
+        for(int i=0;i<vkupno.size();i++){
+
+            dpArray[i] = new DataPoint(i+1,vkupno.get(i));
+
+        }
+
+        BarGraphSeries<DataPoint> series = new BarGraphSeries<DataPoint>(dpArray);
+        graph.addSeries(series);
+
+        /*
         BarGraphSeries<DataPoint> series = new BarGraphSeries<>(new DataPoint[] {
                 new DataPoint(0, -1),
                 new DataPoint(0.2, 5),
@@ -219,7 +337,8 @@ public class DailyIntakeActivity extends  MasterActivity  {
                 new DataPoint(3.8, 0),
                 new DataPoint(4, 0)
         });
-        graph.addSeries(series);
+         */
+
 
         // styling
         series.setValueDependentColor(new ValueDependentColor<DataPoint>() {

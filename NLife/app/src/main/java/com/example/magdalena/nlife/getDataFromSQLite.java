@@ -75,7 +75,9 @@ public class getDataFromSQLite extends AsyncTask<Void,Void,Void> {
         Intent intent = new Intent();
         intent.setAction("GetDailyValues");
         intent.putExtra("Nutrients2",torki);
+        Log.d("Broadcast "," before send");
         context.sendBroadcast(intent);
+        Log.d("Broadcast "," after send");
 
 
         return null;
