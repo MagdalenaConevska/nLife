@@ -1,10 +1,13 @@
 package com.example.magdalena.nlife;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by Magdalena on 2/8/2017.
  */
 
-public class Tuple {
+public class Tuple implements Parcelable{
 
     public String name;
     public String date;
@@ -56,6 +59,42 @@ public class Tuple {
         this.vitaminD = vitaminD;
         this.vitaminE = vitaminE;
     }
+
+    protected Tuple(Parcel in) {
+        name = in.readString();
+        date = in.readString();
+        id = in.readString();
+        quantity = in.readInt();
+        protein = in.readDouble();
+        lipid = in.readDouble();
+        carbohydrate = in.readDouble();
+        glucose = in.readDouble();
+        calcium = in.readDouble();
+        iron = in.readDouble();
+        magnesium = in.readDouble();
+        zinc = in.readDouble();
+        vitaminC = in.readDouble();
+        thiamin = in.readDouble();
+        ribofavin = in.readDouble();
+        niacin = in.readDouble();
+        vitaminB6 = in.readDouble();
+        vitaminB12 = in.readDouble();
+        vitaminA = in.readDouble();
+        vitaminD = in.readDouble();
+        vitaminE = in.readDouble();
+    }
+
+    public static final Creator<Tuple> CREATOR = new Creator<Tuple>() {
+        @Override
+        public Tuple createFromParcel(Parcel in) {
+            return new Tuple(in);
+        }
+
+        @Override
+        public Tuple[] newArray(int size) {
+            return new Tuple[size];
+        }
+    };
 
     public String getName() {
         return name;
@@ -223,5 +262,35 @@ public class Tuple {
 
     public void setVitaminE(double vitaminE) {
         this.vitaminE = vitaminE;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(name);
+        dest.writeString(date);
+        dest.writeString(id);
+        dest.writeInt(quantity);
+        dest.writeDouble(protein);
+        dest.writeDouble(lipid);
+        dest.writeDouble(carbohydrate);
+        dest.writeDouble(glucose);
+        dest.writeDouble(calcium);
+        dest.writeDouble(iron);
+        dest.writeDouble(magnesium);
+        dest.writeDouble(zinc);
+        dest.writeDouble(vitaminC);
+        dest.writeDouble(thiamin);
+        dest.writeDouble(ribofavin);
+        dest.writeDouble(niacin);
+        dest.writeDouble(vitaminB6);
+        dest.writeDouble(vitaminB12);
+        dest.writeDouble(vitaminA);
+        dest.writeDouble(vitaminD);
+        dest.writeDouble(vitaminE);
     }
 }

@@ -10,11 +10,63 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.magdalena.nlife.DailyIntakeActivity">
 
+    <Spinner
+        android:id="@+id/spinnerNutrients1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:spinnerMode="dialog" />
+
+    <Spinner
+        android:id="@+id/spinnerNutrients2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_below="@id/spinnerNutrients1"
+        android:spinnerMode="dialog" />
+
+    <Spinner
+        android:id="@+id/spinnerNutrients3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_below="@id/spinnerNutrients2"
+        android:spinnerMode="dialog" />
+
+    <Spinner
+        android:id="@+id/spinnerNutrients4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_below="@id/spinnerNutrients3"
+        android:spinnerMode="dialog" />
+
+    <Spinner
+        android:id="@+id/spinnerNutrients5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_below="@id/spinnerNutrients4"
+        android:spinnerMode="dialog" />
+
+    <Button
+        android:text="Show"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/spinnerNutrients5"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:background="@color/color1"
+        android:layout_marginBottom="15dp"
+        android:id="@+id/buttonNutrients" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/llTitle"
-        >
+        android:layout_below="@id/buttonNutrients"
+        android:id="@+id/llTitle" >
 
     <TextView
         android:layout_width="wrap_content"
@@ -23,8 +75,7 @@
         android:text="The graph below shows your daily intake"
         android:textColor="@color/color1"
         android:textAlignment="center"
-        android:layout_marginLeft="20dp"
-        />
+        android:layout_marginLeft="20dp" />
 
     </LinearLayout>
 

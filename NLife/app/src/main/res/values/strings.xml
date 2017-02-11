@@ -10,7 +10,26 @@
         <item>Friday</item>
         <item>Saturday</item>
         <item>Sunday</item>
+    </string-array>
 
+    <string-array name="nutrients_list">
+        <item>Protein</item>
+        <item>Total lipid (fat)</item>
+        <item>Carbohydrate</item>
+        <item>Glucose</item>
+        <item>Calcium</item>
+        <item>Iron</item>
+        <item>Magnesium</item>
+        <item>Zinc</item>
+        <item>Vitamin C</item>
+        <item>Thiamin</item>
+        <item>Riboflavin</item>
+        <item>Niacin</item>
+        <item>Vitamin B6</item>
+        <item>Vitamin B12</item>
+        <item>Vitamin A</item>
+        <item>Vitamin D</item>
+        <item>Vitamin E</item>
     </string-array>
 
     <string-array name="categories_array">
