@@ -23,7 +23,7 @@ import java.util.Date;
 public class HistoryActivity extends  MasterActivity  {
 
     ArrayList<Nutrient>lista;
-    String den="Monday";
+    String den;
 
 
     BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {

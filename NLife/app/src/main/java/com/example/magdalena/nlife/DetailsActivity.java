@@ -44,6 +44,7 @@ public class DetailsActivity extends AppCompatActivity {
 
         SharedPreferences sp = getSharedPreferences("ids", this.MODE_PRIVATE);
         name = sp.getString("name", null);
+        //Log.d("IMEEEEEEEEEEEEEEEE",name);
         Log.d("Fragment","got preference");
         TextView tv = (TextView)findViewById(R.id.productName);
         Log.d("Fragment","got name");

@@ -48,9 +48,9 @@ public class getDataFromSQLite extends AsyncTask<Void,Void,Void> {
         String[] selectionArgs = new String[1];
 
         //ova treba da go prezememe od spinnerot- i da dodavame ime na den
-       // selectionArgs[0] = daySelectionFilter;
+        selectionArgs[0] = daySelectionFilter;
 
-        selectionArgs[0] = "09.02.2018";
+        //selectionArgs[0] = "09.02.2018";
 
         Cursor cursor = db.query(NutrientDBEntry.TABLE_NAME, projection, selection, selectionArgs, null, null, null);
 
