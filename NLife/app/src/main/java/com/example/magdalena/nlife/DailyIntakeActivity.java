@@ -19,6 +19,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.LegendRenderer;
@@ -69,8 +70,13 @@ public class DailyIntakeActivity extends  MasterActivity  {
             Log.d("Tuples size ",tuples.size()+"");
             //Log.d("Tuple1",tuples.get(0).getName());
 
+            if(tuples.size()!=0){
+            showGraph();}
+            else{
 
-            showGraph();
+                Toast.makeText(getApplicationContext(),"Your history is empty for "+day,Toast.LENGTH_LONG).show();
+
+            }
         }
     };
 
