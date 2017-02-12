@@ -50,7 +50,11 @@
         android:layout_weight="1"
         android:text="@string/btnWeekly"
         android:textAllCaps="false"
-        android:onClick="startWeeklyIntakeActivity" />
+        android:background="@color/color2"
+        android:layout_marginLeft="5dp"
+        android:onClick="startWeeklyIntakeActivity"
+        android:enabled="false"
+        />
 
     </LinearLayout>
 

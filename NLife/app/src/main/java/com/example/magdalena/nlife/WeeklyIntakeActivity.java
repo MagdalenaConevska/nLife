@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.LegendRenderer;
@@ -21,6 +22,8 @@ import com.jjoe64.graphview.series.BarGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
@@ -39,8 +42,26 @@ public class WeeklyIntakeActivity extends MasterActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
             map=(Map<String,Double>)intent.getExtras().get("Nutrients1");
-            //new getDataFromSQLite(getApplicationContext(),day).execute();
-            showGraph();
+            new getWeeklyDataFromSQLite(getApplicationContext()).execute();
+           // showGraph();
+        }
+    };
+
+    BroadcastReceiver broadcastReceiver3=new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            tuples=(ArrayList<Tuple>)intent.getExtras().get("Nutrients3");
+            Log.d("Tuples"," received");
+            Log.d("Tuples size ",tuples.size()+"");
+            //  Log.d("Tuple1",tuples.get(0).getName());
+
+            if(tuples.size()!=0){
+                showGraph();}
+            else{
+
+                Toast.makeText(getApplicationContext(),"Your history for this week is empty",Toast.LENGTH_LONG).show();
+
+            }
         }
     };
 
@@ -60,20 +81,13 @@ public class WeeklyIntakeActivity extends MasterActivity {
         spinner7.setAdapter(adapter);
         spinner8.setAdapter(adapter);
         spinner9.setAdapter(adapter);
-        values=new TreeSet<String>();
+        values=new LinkedHashSet<String>();
 
         Button buttonShow=(Button)this.findViewById(R.id.buttonNutrientsWeekly);
         buttonShow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(map==null || tuples==null) {
-                    getValues();
-                    Log.d("WeeklyIntakeActivity","getValues()");
-                }
-                else {
-                    showGraph();
-                    Log.d("WeeklyIntakeActivity","showGraph()");
-                }
+               getValues();
             }
         });
 
@@ -83,6 +97,7 @@ public class WeeklyIntakeActivity extends MasterActivity {
     protected void onPause() {
         super.onPause();
         unregisterReceiver(broadcastReceiver1);
+        unregisterReceiver(broadcastReceiver3);
     }
 
     @Override
@@ -91,6 +106,10 @@ public class WeeklyIntakeActivity extends MasterActivity {
         IntentFilter filter1 = new IntentFilter();
         filter1.addAction("GetRecommendedValues");
         registerReceiver(broadcastReceiver1, filter1);
+
+        IntentFilter filter3 = new IntentFilter();
+        filter3.addAction("GetWeeklyValues");
+        registerReceiver(broadcastReceiver3, filter3);
     }
 
     private void getValues(){
@@ -127,18 +146,160 @@ public class WeeklyIntakeActivity extends MasterActivity {
     }
 
     private void showGraph(){
+        //tuka da se prikazat vrednostite za 5te izbrani nutrienti
+
+        //vo setot values se potrebnite nutrienti(5te)
+
+        //vo tuples se site vrateni torki od bazata
+
         GraphView graph = (GraphView) findViewById(R.id.graph2);
+        graph.removeAllSeries();
+
+        Log.d("ShowGraph " ,"started");
+
+        Log.d("Tuples length ",tuples.size()+"");
+
+        ArrayList<Double> vkupno = new ArrayList<Double>();
+
+        //vo vkupno, sekoj element, e vkupnata vrednost za nutrientot pod toj broj
+
+        int brNutrienti=values.size();
+
+        Log.d("Values length",brNutrienti+"");
+
+        for(int i=0;i<brNutrienti;i++){
+
+            vkupno.add(i,0.0);
+
+        }
+
+        Iterator<String> it = values.iterator();
+
+        String currentNutrient = null;
+        double dodadi=0;
+           /* while(it.hasNext() ) {
+                currentNutrient = it.next();
+
+            } */
+
+    /*   for(int y=0;y<tuples.size();y++){
+
+            Log.d("tupleName["+y+"]=",tuples.get(y).getDate());
+
+        } */
+
+        for(int j=0;j<brNutrienti;j++){
+
+            currentNutrient=it.next();
+
+            for(int i=0;i<tuples.size();i++){
+
+                Tuple currentTuple=tuples.get(i);
+
+                if(currentNutrient.equals("Protein")){
+                    dodadi=(currentTuple.getProtein())*currentTuple.getQuantity()/100;
+                }
+                else if(currentNutrient.equals("Total lipid (fat)")){
+                    dodadi=(currentTuple.getLipid())*currentTuple.getQuantity()/100;
+                }
+                else if(currentNutrient.equals("Carbohydrate")){
+                    dodadi=(currentTuple.getCarbohydrate())*currentTuple.getQuantity()/100;
+                }
+                else if(currentNutrient.equals("Glucose")){
+                    dodadi=(currentTuple.getGlucose())*currentTuple.getQuantity()/100;
+                }
+                else if(currentNutrient.equals("Calcium")){
+                    dodadi=(currentTuple.getCalcium())*currentTuple.getQuantity()/100;
+                }
+                else if(currentNutrient.equals("Iron")){
+                    dodadi=(currentTuple.getIron())*currentTuple.getQuantity()/100;
+                }
+                else if(currentNutrient.equals("Magnesium")){
+                    dodadi=(currentTuple.getMagnesium())*currentTuple.getQuantity()/100;
+                }
+                else if(currentNutrient.equals("Zinc")){
+                    dodadi=(currentTuple.getZinc())*currentTuple.getQuantity()/100;
+                }
+                else if(currentNutrient.equals("Vitamin C")){
+                    dodadi=(currentTuple.getVitaminC())*currentTuple.getQuantity()/100;
+                }
+                else if(currentNutrient.equals("Thiamin")){
+                    dodadi=(currentTuple.getThiamin())*currentTuple.getQuantity()/100;
+                }
+                else if(currentNutrient.equals("Riboflavin")){
+                    dodadi=(currentTuple.getRibofavin())*currentTuple.getQuantity()/100;
+                }
+                else if(currentNutrient.equals("Niacin")){
+                    dodadi=(currentTuple.getNiacin())*currentTuple.getQuantity()/100;
+                }
+                else if(currentNutrient.equals("Vitamin B6")){
+                    dodadi=(currentTuple.getVitaminB6())*currentTuple.getQuantity()/100;
+                }
+                else if(currentNutrient.equals("Vitamin B12")){
+                    dodadi=(currentTuple.getVitaminB12())*currentTuple.getQuantity()/100;
+                }
+                else if(currentNutrient.equals("VitaminA")){
+                    dodadi=(currentTuple.getVitaminA())*currentTuple.getQuantity()/100;
+                }
+                else if(currentNutrient.equals("Vitamin D")){
+                    dodadi=(currentTuple.getVitaminD())*currentTuple.getQuantity()/100;
+                }
+                else if(currentNutrient.equals("Vitamin E")){
+                    dodadi=(currentTuple.getVitaminE())*currentTuple.getQuantity()/100;
+                }
+
+                dodadi=dodadi+vkupno.get(j);
+                vkupno.set(j,dodadi);
+                dodadi=0;
+
+            }
+
+        }
+
+        Log.d("Posle polenje na vkupno","sfsfsdf");
+        //posle ova vo vkupno se sodrzhat y vrednostite za grafikot
 
 
+
+
+        DataPoint[] dpArray = new DataPoint[vkupno.size()];
+
+        for(int i=0;i<vkupno.size();i++){
+
+            dpArray[i] = new DataPoint(i+1,vkupno.get(i));
+            Log.d("y("+i+")=",vkupno.get(i)+"");
+
+        }
+
+        BarGraphSeries<DataPoint> series = new BarGraphSeries<DataPoint>(dpArray);
+        graph.addSeries(series);
+
+        /*
         BarGraphSeries<DataPoint> series = new BarGraphSeries<>(new DataPoint[] {
                 new DataPoint(0, -1),
-                new DataPoint(1, 5),
-                new DataPoint(1, 3),
-                new DataPoint(2, 3),
-                new DataPoint(3, 2),
-                new DataPoint(4, 6)
+                new DataPoint(0.2, 5),
+                new DataPoint(0.4, 3),
+                new DataPoint(0.6, 4),
+                new DataPoint(0.8, 2),
+                new DataPoint(1, 6),
+                new DataPoint(1.2, -1),
+                new DataPoint(1.4, 5),
+                new DataPoint(1.6, 3),
+                new DataPoint(1.8, 5),
+                new DataPoint(2, 2),
+                new DataPoint(2.2, 6),
+                new DataPoint(2.4, -1),
+                new DataPoint(2.6, 5),
+                new DataPoint(2.8, 3),
+                new DataPoint(3, 6),
+                new DataPoint(3.2, 5),//
+                new DataPoint(3.4, 0),
+                new DataPoint(3.6, 0),
+                new DataPoint(3.8, 0),
+                new DataPoint(4, 0)
         });
-        graph.addSeries(series);
+         */
+
 
         // styling
         series.setValueDependentColor(new ValueDependentColor<DataPoint>() {
@@ -149,18 +310,20 @@ public class WeeklyIntakeActivity extends MasterActivity {
         });
 
 
-        series.setSpacing(50);
+        series.setSpacing(1);
+        series.setDataWidth(0.2);
+
 
 // draw values on top
         series.setDrawValuesOnTop(true);
-        series.setValuesOnTopColor(Color.RED);
+        series.setValuesOnTopColor(Color.BLACK);
 
      /*   StaticLabelsFormatter staticLabelsFormatter = new StaticLabelsFormatter(graph);
         staticLabelsFormatter.setHorizontalLabels(new String[] {"CH", "F", "Pr","Mi"});
         graph.getGridLabelRenderer().setLabelFormatter(staticLabelsFormatter);
 */
 
-        graph.getLegendRenderer().setVisible(true);
+        //graph.getLegendRenderer().setVisible(true);
         graph.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.TOP);
     }
 

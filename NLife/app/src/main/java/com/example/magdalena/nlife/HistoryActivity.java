@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -43,6 +44,21 @@ public class HistoryActivity extends  MasterActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
 
+        SimpleDateFormat sdf = new SimpleDateFormat("EEEE");
+        Date now = new Date();
+        String currentDayOfTheWeek = sdf.format(now);
+
+        if(currentDayOfTheWeek.equals("Sunday")){
+
+            Button weekly = (Button) findViewById(R.id.btnWeekly);
+            weekly.setEnabled(true);
+
+        }
+        else{
+
+            Button weekly = (Button) findViewById(R.id.btnWeekly);
+            weekly.setEnabled(false);
+        }
 
          Spinner spinner = (Spinner) findViewById(R.id.spinnerDays);
 // Create an ArrayAdapter using the string array and a default spinner layout
