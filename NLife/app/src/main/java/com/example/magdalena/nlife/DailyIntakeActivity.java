@@ -31,7 +31,9 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 import com.jjoe64.graphview.series.PointsGraphSeries;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.Map;
 
 import java.util.Set;
@@ -65,7 +67,7 @@ public class DailyIntakeActivity extends  MasterActivity  {
             tuples=(ArrayList<Tuple>)intent.getExtras().get("Nutrients2");
             Log.d("Tuples"," received");
             Log.d("Tuples size ",tuples.size()+"");
-            Log.d("Tuple1",tuples.get(0).getName());
+            //Log.d("Tuple1",tuples.get(0).getName());
 
 
             showGraph();
@@ -92,7 +94,7 @@ public class DailyIntakeActivity extends  MasterActivity  {
         spinner3.setAdapter(adapter);
         spinner4.setAdapter(adapter);
         spinner5.setAdapter(adapter);
-        values=new TreeSet<String>();
+        values=new LinkedHashSet<>();
 
         Button buttonShow=(Button)this.findViewById(R.id.buttonNutrients);
         buttonShow.setOnClickListener(new View.OnClickListener() {
@@ -355,7 +357,7 @@ public class DailyIntakeActivity extends  MasterActivity  {
 
 
 // draw values on top
-        series.setDrawValuesOnTop(false);
+        series.setDrawValuesOnTop(true);
         series.setValuesOnTopColor(Color.RED);
 
      /*   StaticLabelsFormatter staticLabelsFormatter = new StaticLabelsFormatter(graph);

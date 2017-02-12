@@ -21,6 +21,7 @@ import com.jjoe64.graphview.series.BarGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
@@ -60,7 +61,7 @@ public class WeeklyIntakeActivity extends MasterActivity {
         spinner7.setAdapter(adapter);
         spinner8.setAdapter(adapter);
         spinner9.setAdapter(adapter);
-        values=new TreeSet<String>();
+        values=new HashSet<>();
 
         Button buttonShow=(Button)this.findViewById(R.id.buttonNutrientsWeekly);
         buttonShow.setOnClickListener(new View.OnClickListener() {
