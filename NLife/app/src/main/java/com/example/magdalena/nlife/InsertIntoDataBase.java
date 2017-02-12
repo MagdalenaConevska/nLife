@@ -148,7 +148,7 @@ public class InsertIntoDataBase extends AsyncTask<Void,Void,Void> {
         values.put(NutrientDBEntry.COLUMN_VITAMIN_D,vitD);
         values.put(NutrientDBEntry.COLUMN_VITAMIN_E,vitE);
 
-      //  Log.d("msg:","Pred insert");
+        Log.d("msg:",ime);
 
         db.insert(NutrientDBEntry.TABLE_NAME,null,values);
 

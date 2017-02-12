@@ -98,14 +98,7 @@ public class DailyIntakeActivity extends  MasterActivity  {
         buttonShow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(map==null || tuples==null) {
-                    getValues();
-                    Log.d("DailyIntakeActivity","getValues()");
-                }
-                else {
-                    showGraph();
-                    Log.d("DailyIntakeActivity","showGraph()");
-                }
+               getValues();
             }
         });
 
@@ -205,6 +198,9 @@ public class DailyIntakeActivity extends  MasterActivity  {
 
         //vo tuples se site vrateni torki od bazata
 
+        GraphView graph = (GraphView) findViewById(R.id.graph);
+        graph.removeAllSeries();
+
         Log.d("ShowGraph " ,"started");
 
         Log.d("Tuples length ",tuples.size()+"");
@@ -215,9 +211,11 @@ public class DailyIntakeActivity extends  MasterActivity  {
 
         int brNutrienti=values.size();
 
+        Log.d("Values length",brNutrienti+"");
+
         for(int i=0;i<brNutrienti;i++){
 
-            vkupno.set(i,0.0);
+            vkupno.add(i,0.0);
 
         }
 
@@ -292,21 +290,24 @@ public class DailyIntakeActivity extends  MasterActivity  {
 
                     dodadi=dodadi+vkupno.get(j);
                     vkupno.set(j,dodadi);
+                    dodadi=0;
 
                 }
 
             }
 
+        Log.d("Posle polenje na vkupno","sfsfsdf");
         //posle ova vo vkupno se sodrzhat y vrednostite za grafikot
 
 
-        GraphView graph = (GraphView) findViewById(R.id.graph);
+
 
         DataPoint[] dpArray = new DataPoint[vkupno.size()];
 
         for(int i=0;i<vkupno.size();i++){
 
             dpArray[i] = new DataPoint(i+1,vkupno.get(i));
+            Log.d("y("+i+")=",vkupno.get(i)+"");
 
         }
 
@@ -362,7 +363,7 @@ public class DailyIntakeActivity extends  MasterActivity  {
         graph.getGridLabelRenderer().setLabelFormatter(staticLabelsFormatter);
 */
 
-        graph.getLegendRenderer().setVisible(true);
+        //graph.getLegendRenderer().setVisible(true);
         graph.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.TOP);
     }
 
