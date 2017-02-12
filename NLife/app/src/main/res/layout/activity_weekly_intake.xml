@@ -41,11 +41,19 @@
         android:layout_below="@id/spinnerNutrients8"
         android:spinnerMode="dialog" />
 
+    <Spinner
+        android:id="@+id/spinnerNutrients10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_below="@id/spinnerNutrients9"
+        android:spinnerMode="dialog" />
+
     <Button
         android:text="Show"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/spinnerNutrients9"
+        android:layout_below="@+id/spinnerNutrients10"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:textAllCaps="false"
