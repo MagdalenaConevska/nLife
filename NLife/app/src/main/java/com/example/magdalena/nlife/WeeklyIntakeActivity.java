@@ -10,11 +10,13 @@ import android.graphics.Paint;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jjoe64.graphview.GraphView;
@@ -43,6 +45,9 @@ public class WeeklyIntakeActivity extends MasterActivity {
     ArrayList<Tuple> tuples;
     Set<String> values;
     GraphView graph;
+    TextView textViews[];
+    ArrayList<Double>recommended;
+    ArrayList<Double>intake;
 
     BroadcastReceiver broadcastReceiver1=new BroadcastReceiver() {
         @Override
@@ -60,14 +65,7 @@ public class WeeklyIntakeActivity extends MasterActivity {
             Log.d("Tuples"," received");
             Log.d("Tuples size ",tuples.size()+"");
             //  Log.d("Tuple1",tuples.get(0).getName());
-
-            if(tuples.size()!=0){
-                showGraph();}
-            else{
-
-                Toast.makeText(getApplicationContext(),"Your history for this week is empty",Toast.LENGTH_LONG).show();
-
-            }
+            showGraph();
         }
     };
 
@@ -89,7 +87,9 @@ public class WeeklyIntakeActivity extends MasterActivity {
         spinner8.setAdapter(adapter);
         spinner9.setAdapter(adapter);
         spinner10.setAdapter(adapter);
-        values=new LinkedHashSet<String>();
+        values=new LinkedHashSet<>();
+        recommended=new ArrayList<>();
+        intake=new ArrayList<>();
 
         Button buttonShow=(Button)this.findViewById(R.id.buttonNutrientsWeekly);
         buttonShow.setOnClickListener(new View.OnClickListener() {
@@ -99,6 +99,19 @@ public class WeeklyIntakeActivity extends MasterActivity {
             }
         });
 
+        textViews=new TextView[5];
+        textViews[0]=(TextView)this.findViewById(R.id.weeklyNutrient1);
+        textViews[1]=(TextView)this.findViewById(R.id.weeklyNutrient2);
+        textViews[2]=(TextView)this.findViewById(R.id.weeklyNutrient3);
+        textViews[3]=(TextView)this.findViewById(R.id.weeklyNutrient4);
+        textViews[4]=(TextView)this.findViewById(R.id.weeklyNutrient5);
+        invisibleTextViews();
+    }
+
+    private void invisibleTextViews(){
+        for(TextView t:textViews){
+            t.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -155,9 +168,26 @@ public class WeeklyIntakeActivity extends MasterActivity {
     }
 
     private void showGraph(){
+        if (!recommended.isEmpty()) {
+            recommended.clear();
+        }
+        if (!intake.isEmpty()) {
+            intake.clear();
+        }
+        invisibleTextViews();
         graph = (GraphView) findViewById(R.id.graph2);
         showBars();
         showDots();
+        Iterator<String> it = values.iterator();
+        int i = 0;
+        while (it.hasNext()) {
+            String s1 = getResources().getString(R.string.nutrient_intake);
+            String s2 = TextUtils.htmlEncode(s1);
+            String s3 = String.format(s2, it.next(), recommended.get(i), intake.get(i));
+            textViews[i].setText(s3);
+            textViews[i].setVisibility(View.VISIBLE);
+            i++;
+        }
     }
 
     private void showDots(){
@@ -167,6 +197,7 @@ public class WeeklyIntakeActivity extends MasterActivity {
         while (it.hasNext()) {
             String currentNutrient = it.next();
             dpArray[i] = new DataPoint(i + 1, map.get(currentNutrient) * 7);
+            recommended.add(map.get(currentNutrient) * 7);
             i++;
         }
         PointsGraphSeries<DataPoint> series4 = new PointsGraphSeries<>(dpArray);
@@ -247,6 +278,7 @@ public class WeeklyIntakeActivity extends MasterActivity {
         DataPoint[] dpArray = new DataPoint[vkupno.size()];
         for (int i = 0; i < vkupno.size(); i++) {
             dpArray[i] = new DataPoint(i + 1, vkupno.get(i));
+            intake.add(vkupno.get(i));
             Log.d("y(" + i + ")=", vkupno.get(i) + "");
         }
         BarGraphSeries<DataPoint> series = new BarGraphSeries<DataPoint>(dpArray);

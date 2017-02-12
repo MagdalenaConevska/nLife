@@ -11,6 +11,7 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import android.text.TextUtils;
 import android.view.View;
 
 import android.util.Log;
@@ -19,6 +20,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jjoe64.graphview.GraphView;
@@ -54,6 +56,9 @@ public class DailyIntakeActivity extends  MasterActivity  {
     Spinner spinner5;
     Set<String> values;
     GraphView graph;
+    TextView textViews[];
+    ArrayList<Double>recommended;
+    ArrayList<Double>intake;
 
     BroadcastReceiver broadcastReceiver1=new BroadcastReceiver() {
         @Override
@@ -96,14 +101,30 @@ public class DailyIntakeActivity extends  MasterActivity  {
         spinner4.setAdapter(adapter);
         spinner5.setAdapter(adapter);
         values=new LinkedHashSet<>();
+        recommended=new ArrayList<>();
+        intake=new ArrayList<>();
 
         Button buttonShow=(Button)this.findViewById(R.id.buttonNutrients);
         buttonShow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               getValues();
+                getValues();
             }
         });
+
+        textViews=new TextView[5];
+        textViews[0]=(TextView)this.findViewById(R.id.dailyNutrient1);
+        textViews[1]=(TextView)this.findViewById(R.id.dailyNutrient2);
+        textViews[2]=(TextView)this.findViewById(R.id.dailyNutrient3);
+        textViews[3]=(TextView)this.findViewById(R.id.dailyNutrient4);
+        textViews[4]=(TextView)this.findViewById(R.id.dailyNutrient5);
+        invisibleTextViews();
+    }
+
+    private void invisibleTextViews(){
+        for(TextView t:textViews){
+            t.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -158,10 +179,30 @@ public class DailyIntakeActivity extends  MasterActivity  {
         new GetRecommendedValues(getApplicationContext()).execute(category);
     }
 
-    private void showGraph(){
+    private void showGraph() {
+        if (!recommended.isEmpty()) {
+            recommended.clear();
+        }
+        if (!intake.isEmpty()) {
+            intake.clear();
+        }
+        invisibleTextViews();
         graph = (GraphView) findViewById(R.id.graph);
         showBars();
         showDots();
+        Iterator<String> it = values.iterator();
+        int i = 0;
+        while (it.hasNext()) {
+            String s1 = getResources().getString(R.string.nutrient_intake);
+            String s2 = TextUtils.htmlEncode(s1);
+            String name = it.next();
+            if (recommended.size() > i && intake.size() > i) {
+                String s3 = String.format(s2, name, recommended.get(i), intake.get(i));
+                textViews[i].setText(s3);
+                textViews[i].setVisibility(View.VISIBLE);
+            }
+            i++;
+        }
     }
 
     private void showDots() {
@@ -171,6 +212,7 @@ public class DailyIntakeActivity extends  MasterActivity  {
         while (it.hasNext()) {
             String currentNutrient = it.next();
             dpArray[i] = new DataPoint(i + 1, map.get(currentNutrient));
+            recommended.add(map.get(currentNutrient));
             i++;
         }
         PointsGraphSeries<DataPoint> series4 = new PointsGraphSeries<>(dpArray);
@@ -251,6 +293,7 @@ public class DailyIntakeActivity extends  MasterActivity  {
         DataPoint[] dpArray = new DataPoint[vkupno.size()];
         for (int i = 0; i < vkupno.size(); i++) {
             dpArray[i] = new DataPoint(i + 1, vkupno.get(i));
+            intake.add(vkupno.get(i));
             Log.d("y(" + i + ")=", vkupno.get(i) + "");
         }
         BarGraphSeries<DataPoint> series = new BarGraphSeries<DataPoint>(dpArray);
