@@ -67,11 +67,36 @@
             android:textAllCaps="false"
             android:textColor="@color/white" />
 
+
+        <LinearLayout
+            android:id="@+id/llTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/buttonNutrients">
+
+            <TextView
+                android:id="@+id/tvCurrentDay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="The graph below shows your daily intake"
+                android:textAlignment="center"
+                android:textColor="@color/color1" />
+
+        </LinearLayout>
+
+
+        <com.jjoe64.graphview.GraphView
+            android:id="@+id/graph"
+            android:layout_width="match_parent"
+            android:layout_height="200dip"
+            android:layout_below="@id/llTitle" />
+
         <LinearLayout
             android:id="@+id/dailyNutrientsLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/buttonNutrients"
+            android:layout_below="@+id/graph"
             android:orientation="vertical">
 
             <TextView
@@ -116,31 +141,10 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/llTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/dailyNutrientsLayout">
-
-            <TextView
-                android:id="@+id/tvCurrentDay"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:text="The graph below shows your daily intake"
-                android:textAlignment="center"
-                android:textColor="@color/color1" />
-
-        </LinearLayout>
 
 
 
 
-        <com.jjoe64.graphview.GraphView
-            android:id="@+id/graph"
-            android:layout_width="match_parent"
-            android:layout_height="200dip"
-            android:layout_below="@id/llTitle" />
 
 
 

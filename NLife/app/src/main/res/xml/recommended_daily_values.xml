@@ -40,9 +40,9 @@ CategoryID
     </nutrient>
     <nutrient name="Glucose" id="211" unit="">
         <categories>
-            <category id="0" value="" />
-            <category id="1" value="" />
-            <category id="2" value="" />
+            <category id="0" value="10" />
+            <category id="1" value="20" />
+            <category id="2" value="30" />
             <category id="3" value="90" />
         </categories>
     </nutrient>
