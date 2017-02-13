@@ -1,8 +1,9 @@
-<resources>
+    <resources>
     <string name="app_name">NLife</string>
 
 
     <string-array name="days_array">
+        <item>Please choose a day...</item>
         <item>Monday</item>
         <item>Tuesday</item>
         <item>Wednesday</item>
@@ -32,7 +33,7 @@
         <item>Vitamin E</item>
     </string-array>
 
-    <string name="nutrient_intake">Nutrient: %1$s\nRecommended value: %2$.3f\nYour intake: %3$.3f</string>
+        <string name="nutrient_intake">Nutrient: %1$s\nRecommended value: %2$.3f\nYour intake: %3$.3f</string>
 
     <string-array name="categories_array">
         <item>Choose category...</item>

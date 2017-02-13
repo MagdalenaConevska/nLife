@@ -3,6 +3,7 @@ package com.example.magdalena.nlife;
 import android.content.Context;
 import android.content.Intent;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -22,6 +24,13 @@ import java.util.Date;
 public class GridViewAdapter extends BaseAdapter {
 
     Context context;
+    Product product;
+    Boolean lista;
+
+    public void setProduct(Product p, boolean l){
+        product = p;
+        lista = l;
+    }
 
     public GridViewAdapter(Context c){
         context=c;
@@ -131,6 +140,13 @@ public class GridViewAdapter extends BaseAdapter {
                         //Toast.makeText(context,"3 GridItem clicked",Toast.LENGTH_LONG).show();
                         Intent intent=new Intent(context,HistoryActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        if(product != null){
+                            intent.putExtra("product", product.toString());
+                            Log.d("GridAdapter", lista.toString());
+                            Log.d("GridAdapter", product.toString());
+                            intent.putExtra("lista", lista);
+                        }
+
                         context.startActivity(intent);
                     }
                 });

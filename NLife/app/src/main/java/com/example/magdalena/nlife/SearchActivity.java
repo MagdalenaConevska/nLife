@@ -43,14 +43,11 @@ public class SearchActivity extends MasterActivity {
     BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            // Toast.makeText(getApplicationContext(),"Received broadcast", Toast.LENGTH_LONG).show();
+
             Log.d("SearchActivity","Received broadcast");
             Bundle bundle = intent.getExtras();
-            Log.d("SearchActivity","Received broadcast");
+
             mapa = (HashMap<String, String>) bundle.get("mapa");
-
-            // HashSet<String> set = (HashSet)mapa.entrySet();
-
 
             Set<String> keys = mapa.keySet();
             for(String s : keys){

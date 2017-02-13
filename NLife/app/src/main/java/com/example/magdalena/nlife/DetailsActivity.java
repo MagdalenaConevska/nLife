@@ -5,9 +5,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.support.annotation.IntegerRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -20,13 +22,14 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class DetailsActivity extends AppCompatActivity {
+public class DetailsActivity extends MasterActivity {
 
     ArrayList<Nutrient> lista;
     String name;
     //ListView lv;
     String[] niza;
     ArrayAdapter<String> ad;
+    ArrayList<Product> products;
 
     String id;
 
@@ -82,12 +85,25 @@ public class DetailsActivity extends AppCompatActivity {
 
         Log.d("DetailsActivity","niza size " + niza.length);
 
+
+
         ListView lv = (ListView)findViewById(R.id.lvNutrients);
         ad = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, niza);
 
         Log.d("Fragment","4");
 
+       // int h = niza.length * 60;
+        //lv.setMinimumHeight(h);
+        //View v = findViewById(R.id.activity_search);
+        //v.setMinimumHeight(450 + h);
+
+
         lv.setAdapter(ad);
+
+        //View v = findViewById(R.id.detailsAdditional);
+
+        //lv.addHeaderView(v);
+
         //lv.invalidate();
         Log.d("Fragment","Broadcast registered");
 
@@ -101,9 +117,8 @@ public class DetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
         lista = new ArrayList<>();
-        Log.d("Fragment","onCreate");
         new GetReport(this).execute();
-        Log.d("Fragment","executed");
+
 
         SharedPreferences sp = getSharedPreferences("ids", this.MODE_PRIVATE);
         name = sp.getString("name", null);
@@ -115,28 +130,41 @@ public class DetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                /*String name = "apple";
-                String datum = "09.02.2017";
-                String ndbno = "01009";
-                int kolichina = 2;
-                */
-
-
+                Log.d("DetailsActivity", "ButtonClicked");
 
                 SimpleDateFormat sdf = new SimpleDateFormat("EEEE");
                 Date now = new Date();
                 String currentDayOfTheWeek = sdf.format(now);
 
+                Log.d("DetailsActivity", currentDayOfTheWeek);
+     try{
 
-                String amount=((EditText)findViewById(R.id.numberPicker)).getText().toString();
-                int kolichina=Integer.parseInt(amount);
+                      String amount=((EditText)findViewById(R.id.numberPicker)).getText().toString();
+                      Log.d("DetailsActivity", amount);
+                      int kolichina=Integer.parseInt(amount);
 
-              //  Toast.makeText(getApplicationContext(),"This product has been added to your history",Toast.LENGTH_SHORT);
+                        Product p = new Product(name, Integer.parseInt(id), kolichina);
 
-                //da se proveri dali raboti zapisot vo baza!!!
-                new InsertIntoDataBase(getApplicationContext(),name,currentDayOfTheWeek,id,kolichina,lista).execute();
+                      //da se proveri dali raboti zapisot vo baza!!!
+                      new InsertIntoDataBase(getApplicationContext(),name,currentDayOfTheWeek,id,kolichina,lista).execute();
+                      Intent intent = new Intent(getApplication(), HomeActivity.class);
+
+                        intent.putExtra("name", name);
+                        intent.putExtra("amount", amount);
+                        intent.putExtra("id", id);
+                        intent.putExtra("day", currentDayOfTheWeek);
+
+                        Log.d("DetailsActivity", name + " " + amount + " g " + id + " ");
 
 
+
+
+
+                      startActivity(intent);
+                  }catch(Exception e){
+                      Toast.makeText(getApplicationContext(), "Please enter amount.", Toast.LENGTH_LONG);
+                      Log.e("DetailsActivity", e.getMessage());
+                  }
 
 
                /* double protein = 0, lipid = 0, carbo = 0, glucose = 0, calcium = 0;

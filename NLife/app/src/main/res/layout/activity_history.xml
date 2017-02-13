@@ -13,10 +13,12 @@
 
     <Spinner
         android:id="@+id/spinnerDays"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
         android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/bigLettersMargin"
+        android:padding="@dimen/bigLettersMargin"
+        android:background="@color/color2"
         android:spinnerMode="dialog" />
 
    <ListView
@@ -58,5 +60,13 @@
         />
 
     </LinearLayout>
+
+    <ListView
+        android:id="@+id/lvHistory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/bigLettersMargin"
+        android:layout_below="@+id/llAnalyzeButtons"
+        />
 
 </RelativeLayout>

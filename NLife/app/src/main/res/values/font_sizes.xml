@@ -2,7 +2,7 @@
 <resources>
     <dimen name="golemi">30dp</dimen>
     <dimen name="main">30dp</dimen>
-    <dimen name="mali">16dp</dimen>
+    <dimen name="mali">20sp</dimen>
     <dimen name="bigLettersMargin">15dp</dimen>
     <dimen name="smallLettersBellow">3dp</dimen>
     <dimen name="smallLettersLeft">40dp</dimen>

@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,9 +14,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -24,6 +27,7 @@ import java.util.Date;
 public class HistoryActivity extends  MasterActivity  {
 
     ArrayList<Nutrient>lista;
+    ArrayList<String> products = new ArrayList<>();
     String den;
 
 
@@ -108,6 +112,55 @@ public class HistoryActivity extends  MasterActivity  {
         filter.addAction("GetReportNutrients");
         registerReceiver(broadcastReceiver, filter);
         Log.d("HistoryActivity","Broadcast registered");
+
+        SharedPreferences sp = getApplicationContext().getSharedPreferences("history", getApplicationContext().MODE_PRIVATE);
+
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        if(bundle != null){
+
+            Log.d("HistoryActivity", "bundle isn't null");
+            Boolean truth = bundle.getBoolean("lista");
+            Log.d("HistoryActivity", truth.toString());
+            if(!truth){
+                products = new ArrayList<>();
+            } else {
+                products = new ArrayList<>();
+                int size = sp.getInt("size", 0 );
+                for(int i = 0; i<size; i++){
+                    products.add(sp.getString("key_" + i, null));
+                }
+            }
+            String p = bundle.get("product").toString();
+            Log.d("HistoryActivity", p);
+            products.add(p);
+            Log.d("HistoryActivity", "it's not it");
+            Log.d("HistoryActivity", "got list");
+            ArrayAdapter<String> ad = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, products);
+            Log.d("HistoryActivity", "got adapter");
+            ListView lv = (ListView)findViewById(R.id.lvHistory);
+            Log.d("HistoryActivity", "got listview");
+            lv.setAdapter(ad);
+            Log.d("HistoryActivity", "adapter set");
+            Log.d("HistoryActivity", products.size() + " ");
+
+        }
+
+
+        SharedPreferences.Editor editor = sp.edit();
+
+        int i = 0;
+        editor.putInt("size", products.size());
+
+        for(String s : products){
+            String key = "key_" + i;
+            editor.putString(key, s);
+            i++;
+        }
+
+        editor.commit();
+
+
     }
 
     @Override

@@ -1,77 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_details"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.magdalena.nlife.DetailsActivity">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
-
-    <RelativeLayout
-        android:id="@+id/activity_search"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        android:background="@color/white"
-
-        tools:context="com.example.magdalena.nlife.SearchActivity">
+        android:orientation="vertical"
+        android:background="@color/zelena"
+        android:layout_marginBottom="@dimen/smallLettersBellow">
 
         <TextView
             android:id="@+id/productName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/zelena"
+            android:textColor="@color/white"
             android:layout_marginBottom="@dimen/smallLettersBellow"
             android:layout_marginLeft="@dimen/bigLettersMargin"
             android:layout_marginTop="@dimen/smallLettersBellow"
             android:textSize="@dimen/main"
-            android:text="."/> <!-- samo za da se gleda izgledot, posle ke se izbrise i imeto ke se dodaa dinamicki-->
+            />
 
         <TextView
             android:id="@+id/additionalInformation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/rozeva"
-            android:textSize="@dimen/mali"
+            android:textColor="@color/white"
+            android:textSize="15sp"
             android:layout_marginTop="@dimen/smallLettersBellow"
             android:layout_marginBottom="@dimen/smallLettersBellow"
             android:layout_marginLeft="@dimen/smallLettersLeft"
             android:layout_below="@+id/productName"
-
             />
 
+    </LinearLayout>
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/activity_search"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:background="@color/white"
+        >
 
         <TextView
             android:id="@+id/tvAmount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/zelena"
-            android:textSize="@dimen/golemi"
-            android:layout_margin="@dimen/bigLettersMargin"
-            android:layout_below="@+id/additionalInformation"
+            android:textSize="@dimen/mali"
+            android:layout_marginLeft="@dimen/bigLettersMargin"
+            android:layout_marginTop="@dimen/bigLettersMargin"
+            android:layout_marginRight="@dimen/bigLettersMargin"
+            android:layout_marginBottom="@dimen/smallLettersBellow"
             android:text="Amount: "
             />
-
-        <TextView
-            android:id="@+id/pleaseEnter"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/rozeva"
-            android:textSize="@dimen/mali"
-            android:layout_marginTop="@dimen/smallLettersBellow"
-            android:layout_marginBottom="@dimen/bigLettersMargin"
-            android:layout_marginLeft="@dimen/smallLettersLeft"
-            android:layout_below="@+id/tvAmount"
-            android:text="Please enter the amount of food."
-            />
-
 
         <EditText
             android:id="@+id/numberPicker"
@@ -80,18 +71,30 @@
             android:textColor="@color/zelena"
             android:inputType="numberDecimal"
             android:layout_marginLeft="@dimen/smallLettersLeft"
-            android:layout_below="@+id/pleaseEnter"/>
+            android:layout_marginBottom="@dimen/bigLettersMargin"
+            android:layout_below="@+id/tvAmount"/>
+        <TextView
+            android:id="@+id/tvg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/zelena"
+            android:textSize="@dimen/mali"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/numberPicker"
+            android:layout_below="@+id/tvAmount"
+            android:text=" g"/>
 
         <Button
             android:id="@+id/btnNutrients"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/numberPicker"
-            android:background="@color/color2"
+            android:background="@color/zelena"
             android:textColor="@color/white"
-            android:padding="@dimen/mali"
+            android:padding="@dimen/bigLettersMargin"
             android:textAllCaps="false"
-            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="@dimen/smallLettersLeft"
+            android:layout_below="@+id/tvAmount"
+            android:layout_toRightOf="@+id/tvg"
             android:text="ADD"
             />
 
@@ -100,13 +103,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/zelena"
-            android:textSize="@dimen/golemi"
-            android:layout_marginBottom="@dimen/bigLettersMargin"
+            android:textSize="@dimen/mali"
+            android:layout_marginBottom="@dimen/smallLettersBellow"
             android:layout_marginLeft="@dimen/bigLettersMargin"
             android:layout_marginTop="@dimen/bigLettersMargin"
             android:layout_below="@+id/btnNutrients"
             android:text="Nutrients: "
             />
+
 
         <ListView
             android:id="@+id/lvNutrients"
@@ -114,10 +118,10 @@
             android:layout_height="wrap_content"
             android:textColor="@color/zelena"
             android:layout_below="@+id/tvNutrients"
-            android:layout_marginLeft="@dimen/smallLettersLeft" />
+            >
+
+        </ListView>
 
     </RelativeLayout>
-
-
-</RelativeLayout>
+</LinearLayout>
 
