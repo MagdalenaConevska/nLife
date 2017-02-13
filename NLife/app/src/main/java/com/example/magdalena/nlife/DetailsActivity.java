@@ -131,8 +131,12 @@ public class DetailsActivity extends AppCompatActivity {
                 String amount=((EditText)findViewById(R.id.numberPicker)).getText().toString();
                 int kolichina=Integer.parseInt(amount);
 
+              //  Toast.makeText(getApplicationContext(),"This product has been added to your history",Toast.LENGTH_SHORT);
+
                 //da se proveri dali raboti zapisot vo baza!!!
                 new InsertIntoDataBase(getApplicationContext(),name,currentDayOfTheWeek,id,kolichina,lista).execute();
+
+
 
 
                /* double protein = 0, lipid = 0, carbo = 0, glucose = 0, calcium = 0;

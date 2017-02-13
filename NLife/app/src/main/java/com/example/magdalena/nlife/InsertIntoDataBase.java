@@ -2,9 +2,13 @@ package com.example.magdalena.nlife;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -115,8 +119,6 @@ public class InsertIntoDataBase extends AsyncTask<Void,Void,Void> {
 
         }
 
-        NutrientsDBHelper dbHelper=new NutrientsDBHelper(context); //this=context
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values= new ContentValues();
 
         values.put(NutrientDBEntry.COLUMN_DATE,den);
@@ -148,11 +150,103 @@ public class InsertIntoDataBase extends AsyncTask<Void,Void,Void> {
         values.put(NutrientDBEntry.COLUMN_VITAMIN_D,vitD);
         values.put(NutrientDBEntry.COLUMN_VITAMIN_E,vitE);
 
-        Log.d("msg:",ime);
+        NutrientsDBHelper dbHelper=new NutrientsDBHelper(context); //this=context
+        SQLiteDatabase dbWrite = dbHelper.getWritableDatabase();
 
-        db.insert(NutrientDBEntry.TABLE_NAME,null,values);
+        try {
+            dbWrite.insertOrThrow(NutrientDBEntry.TABLE_NAME, null, values);
+            Log.d("Insert was"," successfull");
 
-        Log.d("msg:","Posle insert");
+        }
+        catch (SQLException e){
+
+            Log.d("Insert was"," not successfull");
+            Log.d("Now lets try "," update");
+
+            Tuple conflictTuple=null;
+
+           // dbWrite.close();
+            SQLiteDatabase dbRead = dbHelper.getReadableDatabase();
+            String projection[] = {NutrientDBEntry.COLUMN_PRODUCT_NAME, NutrientDBEntry.COLUMN_DATE,
+                    NutrientDBEntry.COLUMN_NDBNO, NutrientDBEntry.COLUMN_QUANTITY, NutrientDBEntry.COLUMN_PROTEIN,
+                    NutrientDBEntry.COLUMN_TOTAL_LIPID, NutrientDBEntry.COLUMN_CARBOHYDRATE, NutrientDBEntry.COLUMN_GLUCOSE,
+                    NutrientDBEntry.COLUMN_CALCIUM, NutrientDBEntry.COLUMN_IRON, NutrientDBEntry.COLUMN_MAGNESIUM,
+                    NutrientDBEntry.COLUMN_ZINC, NutrientDBEntry.COLUMN_VITAMIN_C, NutrientDBEntry.COLUMN_THIAMIN,
+                    NutrientDBEntry.COLUMN_RIBOFLAVIN, NutrientDBEntry.COLUMN_NIACIN, NutrientDBEntry.COLUMN_VITAMIN_B6,
+                    NutrientDBEntry.COLUMN_VITAMIN_B12, NutrientDBEntry.COLUMN_VITAMIN_A, NutrientDBEntry.COLUMN_VITAMIN_D,
+                    NutrientDBEntry.COLUMN_VITAMIN_E};
+
+            String selection = NutrientDBEntry.COLUMN_NDBNO + "=?"+" and "+NutrientDBEntry.COLUMN_DATE + "=?";
+            String selectionArgs[]=new String[2];
+            selectionArgs[0]=id;
+            selectionArgs[1]=den;
+
+            Cursor cursor = dbRead.query(NutrientDBEntry.TABLE_NAME, projection, selection, selectionArgs, null, null, null);
+            if(cursor!=null)
+            {
+                cursor.moveToFirst();
+                conflictTuple = new Tuple(cursor.getString(0), cursor.getString(1), cursor.getString(2),
+                        cursor.getInt(3), cursor.getDouble(4), cursor.getDouble(5), cursor.getDouble(6),
+                        cursor.getDouble(7), cursor.getDouble(8), cursor.getDouble(9), cursor.getDouble(10), cursor.getDouble(11),
+                        cursor.getDouble(12), cursor.getDouble(13), cursor.getDouble(14), cursor.getDouble(15), cursor.getDouble(16),
+                        cursor.getDouble(17), cursor.getDouble(18), cursor.getDouble(19), cursor.getDouble(20));
+
+                //shtom postoi konfliktna torka, ke izvrshime update namesto insert
+
+                Log.d("Konfliktanata torka e: ", conflictTuple.getDate() + " " + conflictTuple.getId());
+
+                String whereClause = NutrientDBEntry.COLUMN_DATE + "=?" +" and " + NutrientDBEntry.COLUMN_NDBNO + "=?";
+
+                String selectionArgs2[] = new String[2];
+                selectionArgs2[0]=conflictTuple.getDate();
+                selectionArgs2[0]=conflictTuple.getId();
+
+
+
+                ContentValues valuesForUpdate = new ContentValues();
+
+                 valuesForUpdate.put(NutrientDBEntry.COLUMN_DATE,den);
+                 valuesForUpdate.put(NutrientDBEntry.COLUMN_NDBNO,id);
+                valuesForUpdate.put(NutrientDBEntry.COLUMN_PRODUCT_NAME,ime);
+
+                int kolichina2=kolichina+conflictTuple.getQuantity();
+
+                valuesForUpdate.put(NutrientDBEntry.COLUMN_QUANTITY,kolichina2);
+
+               valuesForUpdate.put(NutrientDBEntry.COLUMN_PROTEIN,protein);
+                valuesForUpdate.put(NutrientDBEntry.COLUMN_TOTAL_LIPID,lipid);
+                valuesForUpdate.put(NutrientDBEntry.COLUMN_CARBOHYDRATE,carbo);
+
+                valuesForUpdate.put(NutrientDBEntry.COLUMN_GLUCOSE,glucose);
+                valuesForUpdate.put(NutrientDBEntry.COLUMN_CALCIUM,calcium);
+                valuesForUpdate.put(NutrientDBEntry.COLUMN_IRON,iron);
+
+                valuesForUpdate.put(NutrientDBEntry.COLUMN_MAGNESIUM,mg);
+                valuesForUpdate.put(NutrientDBEntry.COLUMN_ZINC,zinc);
+                valuesForUpdate.put(NutrientDBEntry.COLUMN_VITAMIN_C,vitC);
+
+                valuesForUpdate.put(NutrientDBEntry.COLUMN_THIAMIN,thiamin);
+                valuesForUpdate.put(NutrientDBEntry.COLUMN_RIBOFLAVIN,ribo);
+                valuesForUpdate.put(NutrientDBEntry.COLUMN_NIACIN,niacin);
+
+                valuesForUpdate.put(NutrientDBEntry.COLUMN_VITAMIN_B6,vitB6);
+                valuesForUpdate.put(NutrientDBEntry.COLUMN_VITAMIN_B12,vitB12);
+                valuesForUpdate.put(NutrientDBEntry.COLUMN_VITAMIN_A,vitA);
+
+                valuesForUpdate.put(NutrientDBEntry.COLUMN_VITAMIN_D,vitD);
+                valuesForUpdate.put(NutrientDBEntry.COLUMN_VITAMIN_E,vitE);
+
+                Log.d("Before"," update");
+
+                dbWrite.update(NutrientDBEntry.TABLE_NAME,valuesForUpdate,whereClause,selectionArgs2);
+
+                Log.d("Update"," was successfull");
+
+
+            }
+
+
+        }
 
 
 
