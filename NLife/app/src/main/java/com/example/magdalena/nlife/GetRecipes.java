@@ -57,7 +57,7 @@ public class GetRecipes extends AsyncTask<Void,Void,Void> {
         super.onPreExecute();
         SharedPreferences sp = context.getSharedPreferences("searches", context.MODE_PRIVATE);
         selectedCategory=sp.getString("category",null);
-        Log.d("kategodija",selectedCategory);
+        Log.d("kategorija",selectedCategory);
         searchItem = sp.getString("search", null);
         Log.d("GetRecipes","got product: " + searchItem);
     }
@@ -76,7 +76,7 @@ public class GetRecipes extends AsyncTask<Void,Void,Void> {
     @Override
     protected Void doInBackground(Void... params) {
         try {
-            URL url = new URL(apiUrl + searchItem + "&max=25" + "&api_key=" + apiKey);
+            URL url = new URL(apiUrl + searchItem + "&max=25&fg=" + selectedCategory.replaceAll(" ", "%20") + "&api_key=" + apiKey);
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
             try {
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
