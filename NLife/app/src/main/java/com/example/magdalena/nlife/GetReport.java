@@ -2,6 +2,7 @@ package com.example.magdalena.nlife;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -44,6 +45,8 @@ public class GetReport extends AsyncTask<Void,Void,Void> {
     @Override
     protected Void doInBackground(Void... params) {
         try {
+            SharedPreferences sp = context.getSharedPreferences("ids", context.MODE_PRIVATE);
+            ndbno=sp.getString("id",null);
             URL url = new URL(apiUrl + ndbno + nut +"&type=f&format=json&api_key=" + apiKey);
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
             try {
