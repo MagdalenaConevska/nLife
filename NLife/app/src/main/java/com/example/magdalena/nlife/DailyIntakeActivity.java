@@ -72,6 +72,11 @@ public class DailyIntakeActivity extends  MasterActivity  {
         @Override
         public void onReceive(Context context, Intent intent) {
             tuples=(ArrayList<Tuple>)intent.getExtras().get("Nutrients2");
+         /*   for(int i=0;i<tuples.size();i++){
+
+                Log.d("Name["+i+"]=",tuples.get(i).getName()+" quantity=" + tuples.get(i).getQuantity());
+
+            } */
             Log.d("Tuples"," received");
             Log.d("Tuples size ",tuples.size()+"");
             //Log.d("Tuple1",tuples.get(0).getName());

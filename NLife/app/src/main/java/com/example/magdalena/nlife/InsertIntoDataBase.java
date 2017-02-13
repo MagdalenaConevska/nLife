@@ -166,7 +166,7 @@ public class InsertIntoDataBase extends AsyncTask<Void,Void,Void> {
             Tuple conflictTuple=null;
 
            // dbWrite.close();
-            SQLiteDatabase dbRead = dbHelper.getReadableDatabase();
+           // SQLiteDatabase dbRead = dbHelper.getReadableDatabase();
             String projection[] = {NutrientDBEntry.COLUMN_PRODUCT_NAME, NutrientDBEntry.COLUMN_DATE,
                     NutrientDBEntry.COLUMN_NDBNO, NutrientDBEntry.COLUMN_QUANTITY, NutrientDBEntry.COLUMN_PROTEIN,
                     NutrientDBEntry.COLUMN_TOTAL_LIPID, NutrientDBEntry.COLUMN_CARBOHYDRATE, NutrientDBEntry.COLUMN_GLUCOSE,
@@ -181,7 +181,7 @@ public class InsertIntoDataBase extends AsyncTask<Void,Void,Void> {
             selectionArgs[0]=id;
             selectionArgs[1]=den;
 
-            Cursor cursor = dbRead.query(NutrientDBEntry.TABLE_NAME, projection, selection, selectionArgs, null, null, null);
+            Cursor cursor = dbWrite.query(NutrientDBEntry.TABLE_NAME, projection, selection, selectionArgs, null, null, null);
             if(cursor!=null)
             {
                 cursor.moveToFirst();
@@ -199,7 +199,7 @@ public class InsertIntoDataBase extends AsyncTask<Void,Void,Void> {
 
                 String selectionArgs2[] = new String[2];
                 selectionArgs2[0]=conflictTuple.getDate();
-                selectionArgs2[0]=conflictTuple.getId();
+                selectionArgs2[1]=conflictTuple.getId();
 
 
 
