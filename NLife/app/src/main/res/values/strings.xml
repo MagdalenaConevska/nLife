@@ -32,6 +32,8 @@
         <item>Vitamin E</item>
     </string-array>
 
+    <string name="nutrient_intake">Nutrient: %1$s\nRecommended value: %2$.3f\nYour intake: %3$.3f</string>
+
     <string-array name="categories_array">
         <item>Choose category...</item>
         <item>American Indian/Alaska Native Foods</item>

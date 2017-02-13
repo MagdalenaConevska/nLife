@@ -11,6 +11,7 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import android.text.TextUtils;
 import android.view.View;
 
 import android.util.Log;
@@ -19,6 +20,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jjoe64.graphview.GraphView;
@@ -32,6 +34,7 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 import com.jjoe64.graphview.series.PointsGraphSeries;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Map;
@@ -52,6 +55,10 @@ public class DailyIntakeActivity extends  MasterActivity  {
     Spinner spinner4;
     Spinner spinner5;
     Set<String> values;
+    GraphView graph;
+    TextView textViews[];
+    ArrayList<Double>recommended;
+    ArrayList<Double>intake;
 
     BroadcastReceiver broadcastReceiver1=new BroadcastReceiver() {
         @Override
@@ -67,15 +74,9 @@ public class DailyIntakeActivity extends  MasterActivity  {
             tuples=(ArrayList<Tuple>)intent.getExtras().get("Nutrients2");
             Log.d("Tuples"," received");
             Log.d("Tuples size ",tuples.size()+"");
-          //  Log.d("Tuple1",tuples.get(0).getName());
+            //Log.d("Tuple1",tuples.get(0).getName());
 
-            if(tuples.size()!=0){
-            showGraph();}
-            else{
-
-                Toast.makeText(getApplicationContext(),"Your history is empty for "+day,Toast.LENGTH_LONG).show();
-
-            }
+            showGraph();
         }
     };
 
@@ -100,16 +101,30 @@ public class DailyIntakeActivity extends  MasterActivity  {
         spinner4.setAdapter(adapter);
         spinner5.setAdapter(adapter);
         values=new LinkedHashSet<>();
+        recommended=new ArrayList<>();
+        intake=new ArrayList<>();
 
         Button buttonShow=(Button)this.findViewById(R.id.buttonNutrients);
         buttonShow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               getValues();
+                getValues();
             }
         });
 
-        // new getDataFromSQLite(getApplicationContext()).execute();
+        textViews=new TextView[5];
+        textViews[0]=(TextView)this.findViewById(R.id.dailyNutrient1);
+        textViews[1]=(TextView)this.findViewById(R.id.dailyNutrient2);
+        textViews[2]=(TextView)this.findViewById(R.id.dailyNutrient3);
+        textViews[3]=(TextView)this.findViewById(R.id.dailyNutrient4);
+        textViews[4]=(TextView)this.findViewById(R.id.dailyNutrient5);
+        invisibleTextViews();
+    }
+
+    private void invisibleTextViews(){
+        for(TextView t:textViews){
+            t.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -129,39 +144,6 @@ public class DailyIntakeActivity extends  MasterActivity  {
         filter2.addAction("GetDailyValues");
         registerReceiver(broadcastReceiver2, filter2);
     }
-
-/*
-    private void showGraph(){
-       GraphView graph = (GraphView) findViewById(R.id.graph);
-
-       /*GraphView graph = (GraphView) findViewById(R.id.graph);
-        BarGraphSeries<DataPoint> series = new BarGraphSeries<>(new DataPoint[] {
-                new DataPoint(0, -2),
-                new DataPoint(1, 5),
-                new DataPoint(2, 3),
-                new DataPoint(3, 2),
-                new DataPoint(4, 6)
-        });
-        graph.addSeries(series);
-
-        PointsGraphSeries<DataPoint> series4 = new PointsGraphSeries<>(new DataPoint[] {
-                new DataPoint(0, 1),
-                new DataPoint(1, 2),
-                new DataPoint(2, 0),
-                new DataPoint(3, -1),
-                new DataPoint(4, 3)
-        });
-        graph.addSeries(series4);
-        series4.setColor(Color.RED);
-        series4.setCustomShape(new PointsGraphSeries.CustomShape() {
-            @Override
-            public void draw(Canvas canvas, Paint paint, float x, float y, DataPointInterface dataPoint) {
-                paint.setStrokeWidth(7);
-                canvas.drawLine(x-10, y, x+10, y, paint);
-               // canvas.drawLine(x+20, y-20, x-20, y+20, paint);
-            }
-        });
-*/
 
     private void getValues(){
         if(!values.isEmpty()){
@@ -197,183 +179,142 @@ public class DailyIntakeActivity extends  MasterActivity  {
         new GetRecommendedValues(getApplicationContext()).execute(category);
     }
 
-
-    private void showGraph(){
-        //tuka da se prikazat vrednostite za 5te izbrani nutrienti
-
-        //vo setot values se potrebnite nutrienti(5te)
-
-        //vo tuples se site vrateni torki od bazata
-
-        GraphView graph = (GraphView) findViewById(R.id.graph);
-        graph.removeAllSeries();
-
-        Log.d("ShowGraph " ,"started");
-
-        Log.d("Tuples length ",tuples.size()+"");
-
-        ArrayList<Double> vkupno = new ArrayList<Double>();
-
-        //vo vkupno, sekoj element, e vkupnata vrednost za nutrientot pod toj broj
-
-        int brNutrienti=values.size();
-
-        Log.d("Values length",brNutrienti+"");
-
-        for(int i=0;i<brNutrienti;i++){
-
-            vkupno.add(i,0.0);
-
+    private void showGraph() {
+        if (!recommended.isEmpty()) {
+            recommended.clear();
         }
-
-         Iterator<String> it = values.iterator();
-
-            String currentNutrient = null;
-            double dodadi=0;
-           /* while(it.hasNext() ) {
-                currentNutrient = it.next();
-
-            } */
-
-            for(int j=0;j<brNutrienti;j++){
-
-                currentNutrient=it.next();
-
-                for(int i=0;i<tuples.size();i++){
-
-                    Tuple currentTuple=tuples.get(i);
-
-                    if(currentNutrient.equals("Protein")){
-                        dodadi=(currentTuple.getProtein())*currentTuple.getQuantity()/100;
-                    }
-                    else if(currentNutrient.equals("Total lipid (fat)")){
-                        dodadi=(currentTuple.getLipid())*currentTuple.getQuantity()/100;
-                    }
-                    else if(currentNutrient.equals("Carbohydrate")){
-                        dodadi=(currentTuple.getCarbohydrate())*currentTuple.getQuantity()/100;
-                    }
-                    else if(currentNutrient.equals("Glucose")){
-                        dodadi=(currentTuple.getGlucose())*currentTuple.getQuantity()/100;
-                    }
-                    else if(currentNutrient.equals("Calcium")){
-                        dodadi=(currentTuple.getCalcium())*currentTuple.getQuantity()/100;
-                    }
-                    else if(currentNutrient.equals("Iron")){
-                        dodadi=(currentTuple.getIron())*currentTuple.getQuantity()/100;
-                    }
-                    else if(currentNutrient.equals("Magnesium")){
-                        dodadi=(currentTuple.getMagnesium())*currentTuple.getQuantity()/100;
-                    }
-                    else if(currentNutrient.equals("Zinc")){
-                        dodadi=(currentTuple.getZinc())*currentTuple.getQuantity()/100;
-                    }
-                    else if(currentNutrient.equals("Vitamin C")){
-                        dodadi=(currentTuple.getVitaminC())*currentTuple.getQuantity()/100;
-                    }
-                    else if(currentNutrient.equals("Thiamin")){
-                        dodadi=(currentTuple.getThiamin())*currentTuple.getQuantity()/100;
-                    }
-                    else if(currentNutrient.equals("Riboflavin")){
-                        dodadi=(currentTuple.getRibofavin())*currentTuple.getQuantity()/100;
-                    }
-                    else if(currentNutrient.equals("Niacin")){
-                        dodadi=(currentTuple.getNiacin())*currentTuple.getQuantity()/100;
-                    }
-                    else if(currentNutrient.equals("Vitamin B6")){
-                        dodadi=(currentTuple.getVitaminB6())*currentTuple.getQuantity()/100;
-                    }
-                    else if(currentNutrient.equals("Vitamin B12")){
-                        dodadi=(currentTuple.getVitaminB12())*currentTuple.getQuantity()/100;
-                    }
-                    else if(currentNutrient.equals("VitaminA")){
-                        dodadi=(currentTuple.getVitaminA())*currentTuple.getQuantity()/100;
-                    }
-                    else if(currentNutrient.equals("Vitamin D")){
-                        dodadi=(currentTuple.getVitaminD())*currentTuple.getQuantity()/100;
-                    }
-                    else if(currentNutrient.equals("Vitamin E")){
-                        dodadi=(currentTuple.getVitaminE())*currentTuple.getQuantity()/100;
-                    }
-
-                    dodadi=dodadi+vkupno.get(j);
-                    vkupno.set(j,dodadi);
-                    dodadi=0;
-
-                }
-
+        if (!intake.isEmpty()) {
+            intake.clear();
+        }
+        invisibleTextViews();
+        graph = (GraphView) findViewById(R.id.graph);
+        showBars();
+        showDots();
+        Iterator<String> it = values.iterator();
+        int i = 0;
+        while (it.hasNext()) {
+            String s1 = getResources().getString(R.string.nutrient_intake);
+            String s2 = TextUtils.htmlEncode(s1);
+            String name = it.next();
+            if (recommended.size() > i && intake.size() > i) {
+                String s3 = String.format(s2, name, recommended.get(i), intake.get(i));
+                textViews[i].setText(s3);
+                textViews[i].setVisibility(View.VISIBLE);
             }
-
-        Log.d("Posle polenje na vkupno","sfsfsdf");
-        //posle ova vo vkupno se sodrzhat y vrednostite za grafikot
-
-
-
-
-        DataPoint[] dpArray = new DataPoint[vkupno.size()];
-
-        for(int i=0;i<vkupno.size();i++){
-
-            dpArray[i] = new DataPoint(i+1,vkupno.get(i));
-            Log.d("y("+i+")=",vkupno.get(i)+"");
-
+            i++;
         }
+    }
 
+    private void showDots() {
+        Iterator<String> it = values.iterator();
+        DataPoint[] dpArray = new DataPoint[values.size()];
+        int i = 0;
+        while (it.hasNext()) {
+            String currentNutrient = it.next();
+            dpArray[i] = new DataPoint(i + 1, map.get(currentNutrient));
+            recommended.add(map.get(currentNutrient));
+            i++;
+        }
+        PointsGraphSeries<DataPoint> series4 = new PointsGraphSeries<>(dpArray);
+        graph.addSeries(series4);
+        series4.setColor(Color.RED);
+        series4.setCustomShape(new PointsGraphSeries.CustomShape() {
+            @Override
+            public void draw(Canvas canvas, Paint paint, float x, float y, DataPointInterface dataPoint) {
+                paint.setStrokeWidth(7);
+                canvas.drawLine(x - 10, y, x + 10, y, paint);
+            }
+        });
+    }
+
+    private void showBars() {
+        //tuka da se prikazat vrednostite za 5te izbrani nutrienti
+        //vo setot values se potrebnite nutrienti(5te)
+        //vo tuples se site vrateni torki od bazata
+        graph.removeAllSeries();
+        Log.d("ShowGraph ", "started");
+        Log.d("Tuples length ", tuples.size() + "");
+        ArrayList<Double> vkupno = new ArrayList<Double>();
+        //vo vkupno, sekoj element, e vkupnata vrednost za nutrientot pod toj broj
+        int brNutrienti = values.size();
+        Log.d("Values length", brNutrienti + "");
+        for (int i = 0; i < brNutrienti; i++) {
+            vkupno.add(i, 0.0);
+        }
+        Iterator<String> it = values.iterator();
+        String currentNutrient = null;
+        double dodadi = 0;
+        for (int j = 0; j < brNutrienti; j++) {
+            currentNutrient = it.next();
+            for (int i = 0; i < tuples.size(); i++) {
+                Tuple currentTuple = tuples.get(i);
+                if (currentNutrient.equals("Protein")) {
+                    dodadi = (currentTuple.getProtein()) * currentTuple.getQuantity() / 100;
+                } else if (currentNutrient.equals("Total lipid (fat)")) {
+                    dodadi = (currentTuple.getLipid()) * currentTuple.getQuantity() / 100;
+                } else if (currentNutrient.equals("Carbohydrate")) {
+                    dodadi = (currentTuple.getCarbohydrate()) * currentTuple.getQuantity() / 100;
+                } else if (currentNutrient.equals("Glucose")) {
+                    dodadi = (currentTuple.getGlucose()) * currentTuple.getQuantity() / 100;
+                } else if (currentNutrient.equals("Calcium")) {
+                    dodadi = (currentTuple.getCalcium()) * currentTuple.getQuantity() / 100;
+                } else if (currentNutrient.equals("Iron")) {
+                    dodadi = (currentTuple.getIron()) * currentTuple.getQuantity() / 100;
+                } else if (currentNutrient.equals("Magnesium")) {
+                    dodadi = (currentTuple.getMagnesium()) * currentTuple.getQuantity() / 100;
+                } else if (currentNutrient.equals("Zinc")) {
+                    dodadi = (currentTuple.getZinc()) * currentTuple.getQuantity() / 100;
+                } else if (currentNutrient.equals("Vitamin C")) {
+                    dodadi = (currentTuple.getVitaminC()) * currentTuple.getQuantity() / 100;
+                } else if (currentNutrient.equals("Thiamin")) {
+                    dodadi = (currentTuple.getThiamin()) * currentTuple.getQuantity() / 100;
+                } else if (currentNutrient.equals("Riboflavin")) {
+                    dodadi = (currentTuple.getRibofavin()) * currentTuple.getQuantity() / 100;
+                } else if (currentNutrient.equals("Niacin")) {
+                    dodadi = (currentTuple.getNiacin()) * currentTuple.getQuantity() / 100;
+                } else if (currentNutrient.equals("Vitamin B6")) {
+                    dodadi = (currentTuple.getVitaminB6()) * currentTuple.getQuantity() / 100;
+                } else if (currentNutrient.equals("Vitamin B12")) {
+                    dodadi = (currentTuple.getVitaminB12()) * currentTuple.getQuantity() / 100;
+                } else if (currentNutrient.equals("VitaminA")) {
+                    dodadi = (currentTuple.getVitaminA()) * currentTuple.getQuantity() / 100;
+                } else if (currentNutrient.equals("Vitamin D")) {
+                    dodadi = (currentTuple.getVitaminD()) * currentTuple.getQuantity() / 100;
+                } else if (currentNutrient.equals("Vitamin E")) {
+                    dodadi = (currentTuple.getVitaminE()) * currentTuple.getQuantity() / 100;
+                }
+                dodadi = dodadi + vkupno.get(j);
+                vkupno.set(j, dodadi);
+                dodadi = 0;
+            }
+        }
+        Log.d("Posle polenje na vkupno", "sfsfsdf");
+        //posle ova vo vkupno se sodrzhat y vrednostite za grafikot
+        DataPoint[] dpArray = new DataPoint[vkupno.size()];
+        for (int i = 0; i < vkupno.size(); i++) {
+            dpArray[i] = new DataPoint(i + 1, vkupno.get(i));
+            intake.add(vkupno.get(i));
+            Log.d("y(" + i + ")=", vkupno.get(i) + "");
+        }
         BarGraphSeries<DataPoint> series = new BarGraphSeries<DataPoint>(dpArray);
         graph.addSeries(series);
-
-        /*
-        BarGraphSeries<DataPoint> series = new BarGraphSeries<>(new DataPoint[] {
-                new DataPoint(0, -1),
-                new DataPoint(0.2, 5),
-                new DataPoint(0.4, 3),
-                new DataPoint(0.6, 4),
-                new DataPoint(0.8, 2),
-                new DataPoint(1, 6),
-                new DataPoint(1.2, -1),
-                new DataPoint(1.4, 5),
-                new DataPoint(1.6, 3),
-                new DataPoint(1.8, 5),
-                new DataPoint(2, 2),
-                new DataPoint(2.2, 6),
-                new DataPoint(2.4, -1),
-                new DataPoint(2.6, 5),
-                new DataPoint(2.8, 3),
-                new DataPoint(3, 6),
-                new DataPoint(3.2, 5),//
-                new DataPoint(3.4, 0),
-                new DataPoint(3.6, 0),
-                new DataPoint(3.8, 0),
-                new DataPoint(4, 0)
-        });
-         */
-
-
         // styling
         series.setValueDependentColor(new ValueDependentColor<DataPoint>() {
             @Override
             public int get(DataPoint data) {
-                return Color.rgb((int) data.getX()*255/4, (int) Math.abs(data.getY()*255/6), 100);
+                return Color.rgb((int) data.getX() * 255 / 4, (int) Math.abs(data.getY() * 255 / 6), 100);
             }
         });
-
-
         series.setSpacing(1);
         series.setDataWidth(0.2);
-
-
-// draw values on top
+        // draw values on top
         series.setDrawValuesOnTop(true);
-        series.setValuesOnTopColor(Color.RED);
-
-     /*   StaticLabelsFormatter staticLabelsFormatter = new StaticLabelsFormatter(graph);
+        series.setValuesOnTopColor(Color.BLACK);
+        /*   StaticLabelsFormatter staticLabelsFormatter = new StaticLabelsFormatter(graph);
         staticLabelsFormatter.setHorizontalLabels(new String[] {"CH", "F", "Pr","Mi"});
         graph.getGridLabelRenderer().setLabelFormatter(staticLabelsFormatter);
-*/
-
+        */
         //graph.getLegendRenderer().setVisible(true);
         graph.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.TOP);
     }
-
-
-
 }
