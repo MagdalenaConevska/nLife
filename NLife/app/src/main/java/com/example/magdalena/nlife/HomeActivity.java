@@ -38,7 +38,7 @@ public class HomeActivity extends MasterActivity {
         setContentView(R.layout.activity_home);
 
         Log.d("HomeActivity", "before addItem in onCreate()");
-        addItem();
+        //addItem();
         Log.d("HomeActivity", "after addItem in onCreate()");
 
         GridView gridView=(GridView)this.findViewById(R.id.gridView);

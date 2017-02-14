@@ -2,6 +2,7 @@ package com.example.magdalena.nlife;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteConstraintException;
@@ -34,6 +35,14 @@ public class InsertIntoDataBase extends AsyncTask<Void,Void,Void> {
 
     }
 
+    @Override
+    protected void onPostExecute(Void aVoid) {
+        super.onPostExecute(aVoid);
+        Intent intent = new Intent();
+        intent.setAction("InsertToSQLite");
+        context.sendBroadcast(intent);
+        Log.d("InsertIntoDatabase","broadcast sent");
+    }
 
     @Override
     protected Void doInBackground(Void... params) {
@@ -247,8 +256,6 @@ public class InsertIntoDataBase extends AsyncTask<Void,Void,Void> {
 
 
         }
-
-
 
         return null;
     }
