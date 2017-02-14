@@ -108,7 +108,7 @@
             android:layout_marginLeft="@dimen/bigLettersMargin"
             android:layout_marginTop="@dimen/bigLettersMargin"
             android:layout_below="@+id/btnNutrients"
-            android:text="Nutrients: "
+            android:text="Nutrients in 100g: "
             />
 
 
