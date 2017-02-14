@@ -2,6 +2,7 @@ package com.example.magdalena.nlife;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -37,6 +38,7 @@ public class SearchActivity extends MasterActivity {
     String[] niza;
     ArrayAdapter<String> ad;
     EditText et;
+    private ProgressDialog dialog;
 
     String category;
 
@@ -62,6 +64,7 @@ public class SearchActivity extends MasterActivity {
             showInList();
 
             Log.d("SearchActivity","number of items in list: " + lista.size());
+            dialog.dismiss();
 
         }
     };
@@ -144,17 +147,27 @@ public class SearchActivity extends MasterActivity {
                     Log.d("SearchActivity","Service starting");
                     //startService(new Intent(getApplicationContext(), GetRecipesService.class).putExtra("search", searchItem));
                     Log.d("GetRecipes","got product: " + searchItem);
-                    SharedPreferences sp = getApplicationContext().getSharedPreferences("searches", getApplicationContext().MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sp.edit();
-                    editor.putString("search", searchItem);
-                    editor.putString("category",category);
-                    editor.commit();
+                    if(searchItem.equals("")){
+                        Toast.makeText(getApplicationContext(), "Please type recipe keyword", Toast.LENGTH_LONG).show();
+                    }
+                    else if(category.equals("Choose category..."))
+                    {
+                        Toast.makeText(getApplicationContext(), "Please choose category", Toast.LENGTH_LONG).show();
+                    }
+                    else {
+                        SharedPreferences sp = getApplicationContext().getSharedPreferences("searches", getApplicationContext().MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sp.edit();
+                        editor.putString("search", searchItem);
+                        editor.putString("category", category);
+                        editor.commit();
 
-                    Intent intent = new Intent(getApplicationContext(), GetRecipesService.class);
-                    //intent.putExtra("search", searchItem);
+                        Intent intent = new Intent(getApplicationContext(), GetRecipesService.class);
+                        //intent.putExtra("search", searchItem);
 
-                    getApplicationContext().startService(intent);
-                    Log.d("SearchActivity","Service should have started");
+                        getApplicationContext().startService(intent);
+                        Log.d("SearchActivity", "Service should have started");
+                        showDialog();
+                    }
                 }
                 else {
                     Toast.makeText(getApplicationContext(), "Device is not connected to internet. " +
@@ -217,5 +230,13 @@ public class SearchActivity extends MasterActivity {
         });
 
 
+    }
+
+    private void showDialog(){
+        dialog=new ProgressDialog(this);
+        dialog.setIndeterminate(true);
+        dialog.setTitle("Getting recipes");
+        dialog.setMessage("Getting recipes...please wait");
+        dialog.show();
     }
 }

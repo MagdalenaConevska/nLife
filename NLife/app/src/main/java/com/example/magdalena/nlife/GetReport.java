@@ -1,7 +1,10 @@
 package com.example.magdalena.nlife;
 
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -25,9 +28,11 @@ import java.util.TreeSet;
 public class GetReport extends AsyncTask<Void,Void,Void> {
 
     Context context;
+    Activity activity;
 
-    public GetReport(Context c) {
-        context = c;
+    public GetReport(Activity a) {
+        context = a.getApplicationContext();
+        activity = a;
     }
 
     String result="";
@@ -40,10 +45,29 @@ public class GetReport extends AsyncTask<Void,Void,Void> {
 
     static JSONObject jsonObject;
     ArrayList<Nutrient> lista = new ArrayList<>();
+    private ProgressDialog dialog;
+
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+        dialog=new ProgressDialog(activity);
+        dialog.setIndeterminate(true);
+        dialog.setTitle("Getting report");
+        dialog.setMessage("Getting report...please wait");
+        dialog.show();
+    }
+
+    @Override
+    protected void onPostExecute(Void aVoid) {
+        super.onPostExecute(aVoid);
+        dialog.dismiss();
+    }
 
     @Override
     protected Void doInBackground(Void... params) {
         try {
+            SharedPreferences sp = context.getSharedPreferences("ids", context.MODE_PRIVATE);
+            ndbno=sp.getString("id",null);
             URL url = new URL(apiUrl + ndbno + nut +"&type=f&format=json&api_key=" + apiKey);
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
             try {
