@@ -55,13 +55,20 @@
 
     </LinearLayout>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/color1"
+        android:layout_below="@id/llAnalyzeButtons"
+        android:id="@+id/eatenThings"
+        />
+
     <ListView
         android:id="@+id/lvHistory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/bigLettersMargin"
-
-        android:layout_below="@id/llAnalyzeButtons"
+        android:layout_below="@id/eatenThings"
 
         />
 

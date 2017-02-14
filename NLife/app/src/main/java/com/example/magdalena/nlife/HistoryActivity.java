@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.lang.reflect.Array;
@@ -28,7 +29,8 @@ public class HistoryActivity extends  MasterActivity  {
 
     ArrayList<Nutrient>lista;
     ArrayList<String> products = new ArrayList<>();
-    String den;
+    String den="Monday";
+    int pozicija=0;
 
     ArrayList<Tuple> tuples;
 // vo tuples se potrebnite data za listata
@@ -61,6 +63,10 @@ public class HistoryActivity extends  MasterActivity  {
 
             }
 
+            TextView tvEatenThings = (TextView) findViewById(R.id.eatenThings);
+            String text ="Products you have eaten on " + den + ":";
+            tvEatenThings.setText(text);
+
             ArrayAdapter<String> adapterHistory = new ArrayAdapter<String>(getApplicationContext(), R.layout.lv_history_item,izvor);
 
             ListView listView = (ListView)findViewById(R.id.lvHistory);
@@ -82,6 +88,16 @@ public class HistoryActivity extends  MasterActivity  {
         Date now = new Date();
         String currentDayOfTheWeek = sdf.format(now);
 
+        if(currentDayOfTheWeek.equals("Monday")) pozicija=0;
+        else if(currentDayOfTheWeek.equals("Tuesday")) pozicija=1;
+        else if(currentDayOfTheWeek.equals("Wednesday")) pozicija=2;
+        else if(currentDayOfTheWeek.equals("Thursday")) pozicija=3;
+        else if(currentDayOfTheWeek.equals("Friday")) pozicija=4;
+        else if(currentDayOfTheWeek.equals("Saturday")) pozicija=5;
+        else if(currentDayOfTheWeek.equals("Sunday")) pozicija=6;
+
+
+
         if(currentDayOfTheWeek.equals("Sunday")){
 
             Button weekly = (Button) findViewById(R.id.btnWeekly);
@@ -94,7 +110,8 @@ public class HistoryActivity extends  MasterActivity  {
             weekly.setEnabled(false);
         }
 
-        new getDataFromSQLite(this,currentDayOfTheWeek).execute();
+
+
 
          Spinner spinner = (Spinner) findViewById(R.id.spinnerDays);
 // Create an ArrayAdapter using the string array and a default spinner layout
@@ -111,6 +128,17 @@ public class HistoryActivity extends  MasterActivity  {
                // tv.setText("Spinner selected : ");
                 //tv.setText(tv.getText() + parent.getItemAtPosition(position).toString());
                 den=parent.getItemAtPosition(position).toString();
+                if(den.equals("Monday")) pozicija=0;
+                else if(den.equals("Tuesday")) pozicija=1;
+                else if(den.equals("Wednesday")) pozicija=2;
+                else if(den.equals("Thursday")) pozicija=3;
+                else if(den.equals("Friday")) pozicija=4;
+                else if(den.equals("Saturday")) pozicija=5;
+                else if(den.equals("Sunday")) pozicija=6;
+
+
+
+                new getDataFromSQLite(getApplicationContext(),den).execute();
             }
 
             @Override
@@ -118,6 +146,12 @@ public class HistoryActivity extends  MasterActivity  {
                 //Another interface callback
             }
         });
+
+        spinner.setSelection(pozicija);
+
+
+
+        new getDataFromSQLite(this,den).execute();
 
 
       /*  String[] izvor= new String [tuples.size()];
