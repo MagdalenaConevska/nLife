@@ -1,6 +1,7 @@
 package com.example.magdalena.nlife;
 
 import android.app.PendingIntent;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -69,8 +70,6 @@ public class GetRecipes extends AsyncTask<Void,Void,Void> {
         intent.setAction("GetRecipes");
         intent.putExtra("mapa", mapa);
         context.sendBroadcast(intent);
-
-
     }
 
     @Override
