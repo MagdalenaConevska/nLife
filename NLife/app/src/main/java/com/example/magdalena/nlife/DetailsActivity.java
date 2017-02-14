@@ -137,6 +137,20 @@ public class DetailsActivity extends MasterActivity {
                     amount = ((EditText) findViewById(R.id.numberPicker)).getText().toString();
                     Log.d("DetailsActivity", amount);
                     int kolichina = Integer.parseInt(amount);
+
+                    String category = getIntent().getStringExtra("category");
+                    SharedPreferences spp = getApplicationContext().getSharedPreferences("categories", getApplicationContext().MODE_PRIVATE);
+                    SharedPreferences.Editor editor = spp.edit();
+                    Log.d("Show yourself", category);
+                    if(category.equals("Vegetables and Vegetable Products")  || category.equals("Fruits and Fruit Juices")){
+                        int count = spp.getInt("count", 0);
+                        Log.d("count", count + " ");
+                        count += kolichina;
+                        Log.d("count", count + " ");
+                        editor.putInt("count", count);
+                        editor.commit();
+                    }
+
                     Product p = new Product(name, Integer.parseInt(id), kolichina);
                     //da se proveri dali raboti zapisot vo baza!!!
                     new InsertIntoDataBase(getApplicationContext(), name, currentDayOfTheWeek, id, kolichina, lista).execute();

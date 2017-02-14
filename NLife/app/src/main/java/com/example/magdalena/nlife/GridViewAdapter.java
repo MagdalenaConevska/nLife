@@ -106,7 +106,7 @@ public class GridViewAdapter extends BaseAdapter {
                     public void onClick(View v) {
                         //Toast.makeText(context,"2 GridItem clicked",Toast.LENGTH_LONG).show();
                         //show dialog instead of next code
-                        int age=Integer.parseInt(PreferenceManager.getDefaultSharedPreferences(context).getString(context.getResources().getString(R.string.pref_age_key),context.getResources().getString(R.string.pref_age_defaultValue)));
+                   /*     int age=Integer.parseInt(PreferenceManager.getDefaultSharedPreferences(context).getString(context.getResources().getString(R.string.pref_age_key),context.getResources().getString(R.string.pref_age_defaultValue)));
                         String gender=PreferenceManager.getDefaultSharedPreferences(context).getString(context.getResources().getString(R.string.pref_gender_key),context.getResources().getString(R.string.pref_gender_defaultValue));
                         int category=0;
                         if(age==0 || age==1) {
@@ -128,6 +128,13 @@ public class GridViewAdapter extends BaseAdapter {
                             }
                         }
                         new GetRecommendedValues(context).execute(category);
+
+                        */
+
+
+                        Intent intent = new Intent(context, FiveADayActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        context.startActivity(intent);
                     }
                 });
                 break;

@@ -217,6 +217,7 @@ public class SearchActivity extends MasterActivity {
 
 
                     Intent intent = new Intent(getApplication(), DetailsActivity.class);
+                    intent.putExtra("category", category);
                     startActivity(intent);
 
                 }

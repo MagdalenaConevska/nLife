@@ -21,7 +21,9 @@
         <activity android:name=".HistoryActivity" />
         <activity android:name=".DailyIntakeActivity" />
         <activity android:name=".MasterActivity" />
-        <activity android:name=".SearchActivity" android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".SearchActivity"
+            android:windowSoftInputMode="stateHidden" />
         <activity android:name=".WeeklyIntakeActivity" />
         <activity android:name=".SettingsActivity" />
 
@@ -30,7 +32,10 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".DetailsActivity" android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".DetailsActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".FiveADayActivity"></activity>
     </application>
 
 </manifest>

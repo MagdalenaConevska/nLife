@@ -1,4 +1,4 @@
-    <resources>
+<resources>
     <string name="app_name">NLife</string>
 
 
@@ -11,6 +11,9 @@
         <item>Saturday</item>
         <item>Sunday</item>
     </string-array>
+
+    <string name="fiveADay">It is recomended that a person consumes around 450 grams of fruits and/or vegetables a day. Bellow we tell you how much you have consumed today, and how much more you need to consume in order to stay healthy.</string>
+
 
     <string-array name="nutrients_list">
         <item>Protein</item>
@@ -32,7 +35,7 @@
         <item>Vitamin E</item>
     </string-array>
 
-        <string name="nutrient_intake">Nutrient: %1$s\nRecommended value: %2$.3f\nYour intake: %3$.3f</string>
+    <string name="nutrient_intake">Nutrient: %1$s\nRecommended value: %2$.3f\nYour intake: %3$.3f</string>
 
     <string-array name="categories_array">
         <item>Choose category...</item>

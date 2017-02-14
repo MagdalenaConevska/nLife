@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_five_aday"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+
+    tools:context="com.example.magdalena.nlife.FiveADayActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/zelena"
+        android:layout_marginBottom="@dimen/smallLettersBellow"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/fiveADay"
+            android:textSize="@dimen/mali"
+            android:textColor="@color/white"
+            android:layout_marginBottom="@dimen/smallLettersBellow"
+
+            android:layout_marginLeft="@dimen/bigLettersMargin"
+            android:layout_marginTop="@dimen/smallLettersBellow"
+
+            />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/prvo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/golemi"
+            android:layout_marginTop="@dimen/bigLettersMargin"
+            android:textAlignment="center"
+            android:textColor="@color/zelena"
+            android:text="Today you have eaten: "
+            />
+
+        <TextView
+            android:id="@+id/tv5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/main"
+            android:padding="@dimen/bigLettersMargin"
+            android:textAlignment="center"
+            android:background="@color/zelena"
+            android:textColor="@color/white"
+            android:layout_below="@+id/prvo"/>
+
+        <TextView
+            android:id="@+id/vtoro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="@dimen/mali"
+            android:textColor="@color/zelena"
+            android:layout_below="@id/tv5"
+            android:layout_marginBottom="@dimen/bigLettersMargin"
+            android:text="of fruits and vegetables."
+            />
+
+        <TextView
+            android:id="@+id/treto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="@dimen/golemi"
+            android:textColor="@color/zelena"
+            android:layout_below="@id/vtoro"
+            android:text="Today you should eat: "
+            />
+
+        <TextView
+            android:id="@+id/cetvrto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="@dimen/main"
+            android:padding="@dimen/bigLettersMargin"
+            android:background="@color/zelena"
+            android:textColor="@color/white"
+            android:layout_below="@+id/treto"/>
+
+        <TextView
+            android:id="@+id/peto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="@dimen/mali"
+            android:textColor="@color/zelena"
+            android:layout_below="@id/cetvrto"
+            android:text="more fruits and vegetables."
+            />
+
+    </RelativeLayout>
+
+</LinearLayout>
