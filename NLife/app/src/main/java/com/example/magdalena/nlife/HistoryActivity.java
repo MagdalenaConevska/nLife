@@ -136,8 +136,6 @@ public class HistoryActivity extends  MasterActivity  {
                 else if(den.equals("Saturday")) pozicija=5;
                 else if(den.equals("Sunday")) pozicija=6;
 
-
-
                 new getDataFromSQLite(getApplicationContext(),den).execute();
             }
 
@@ -148,8 +146,6 @@ public class HistoryActivity extends  MasterActivity  {
         });
 
         spinner.setSelection(pozicija);
-
-
 
         new getDataFromSQLite(this,den).execute();
 
