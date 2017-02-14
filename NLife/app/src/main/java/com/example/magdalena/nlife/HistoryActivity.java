@@ -30,6 +30,8 @@ public class HistoryActivity extends  MasterActivity  {
     ArrayList<String> products = new ArrayList<>();
     String den;
 
+    ArrayList<Tuple> tuples;
+// vo tuples se potrebnite data za listata
 
     BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
@@ -40,6 +42,34 @@ public class HistoryActivity extends  MasterActivity  {
 
         }
     };
+
+    BroadcastReceiver broadcastReceiver4=new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            tuples=(ArrayList<Tuple>)intent.getExtras().get("Nutrients2");
+             Log.d("Tuples"," received");
+            Log.d("Tuples size ",tuples.size()+"");
+            for(int i=0;i<tuples.size();i++)
+            Log.d("Tuple["+i+"]=",tuples.get(i).getName()+" quantity="+ tuples.get(i).getQuantity());
+
+            String[] izvor= new String [tuples.size()];
+
+            for(int i=0;i<tuples.size();i++){
+
+              //  izvor[i]=tuples.get(i).getName()+" "+tuples.get(i).getQuantity()+"g";
+                izvor[i]=tuples.get(i).getName();
+
+            }
+
+            ArrayAdapter<String> adapterHistory = new ArrayAdapter<String>(getApplicationContext(), R.layout.lv_history_item,izvor);
+
+            ListView listView = (ListView)findViewById(R.id.lvHistory);
+            listView.setAdapter(adapterHistory);
+
+        }
+    };
+
+
 
 
 
@@ -64,6 +94,8 @@ public class HistoryActivity extends  MasterActivity  {
             weekly.setEnabled(false);
         }
 
+        new getDataFromSQLite(this,currentDayOfTheWeek).execute();
+
          Spinner spinner = (Spinner) findViewById(R.id.spinnerDays);
 // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -87,19 +119,19 @@ public class HistoryActivity extends  MasterActivity  {
             }
         });
 
-        /*spinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                den=parent.getItemAtPosition(position).toString();
-            }
-        });*/
 
+      /*  String[] izvor= new String [tuples.size()];
 
+        for(int i=0;i<tuples.size();i++){
 
+                izvor[i]=tuples.get(i).getName()+"          "+tuples.get(i).getQuantity()+"g";
 
+        }
 
+        ArrayAdapter<String> adapterHistory = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,izvor);
 
-       // new GetReport(getApplicationContext()).execute();
+        ListView listView = (ListView)findViewById(R.id.lvHistory);
+        listView.setAdapter(adapterHistory); */
 
 
     }
@@ -112,6 +144,12 @@ public class HistoryActivity extends  MasterActivity  {
         filter.addAction("GetReportNutrients");
         registerReceiver(broadcastReceiver, filter);
         Log.d("HistoryActivity","Broadcast registered");
+
+        IntentFilter filter4 = new IntentFilter();
+        filter4.addAction("GetDailyValues");
+        registerReceiver(broadcastReceiver4, filter4);
+
+        Log.d("HistoryActivity","Broadcast4 registered");
 
         SharedPreferences sp = getApplicationContext().getSharedPreferences("history", getApplicationContext().MODE_PRIVATE);
 
@@ -165,9 +203,12 @@ public class HistoryActivity extends  MasterActivity  {
 
     @Override
     protected void onPause() {
+
         super.onPause();
         unregisterReceiver(broadcastReceiver);
+        unregisterReceiver(broadcastReceiver4);
         Log.d("HistoryActivity","Broadcast unregistered");
+
     }
 
 
